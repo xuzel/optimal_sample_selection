@@ -2,7 +2,8 @@ import numpy as np
 from sko.SA import SA
 import matplotlib.pyplot as plt
 import pandas as pd
-from data_structure import SatInfo, fitness_func_with_param, TEST_SET, hash_function
+from data_structure import SatInfo, fitness_func_with_param
+from utils import TEST_SET, hash_function
 from time import perf_counter
 
 
