@@ -1,10 +1,8 @@
 from sko.PSO import PSO
 import matplotlib.pyplot as plt
-from data_structure import SatInfo, fitness_func_with_param, TEST_SET, hash_function
+from data_structure import SatInfo, fitness_func_with_param
+from utils import TEST_SET, hash_function
 from time import perf_counter
-
-
-
 
 
 def main():
