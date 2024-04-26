@@ -1,20 +1,10 @@
 import numpy as np
-from data_structure import SatInfo
+from data_structure import SatInfo, fitness_func_with_param
 from sko.GA import GA
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
 from time import perf_counter
-
-
-def fitness_func_with_param(set_info: SatInfo):
-    def fitness_func(solution):
-        if set_info.all_j_subsets_covered(solution):
-            return sum(solution)
-        else:
-            return math.inf
-
-    return fitness_func
 
 
 # def greedy_set_cover(cover_graph):
@@ -29,7 +19,7 @@ def fitness_func_with_param(set_info: SatInfo):
 
 def main():
     start_time = perf_counter()
-    sat_info = SatInfo(45, 12, 6, 6, 4)
+    sat_info = SatInfo(45, 7, 6, 5, 5)
     gene_size = sat_info.get_input_len()
     print(gene_size)
     num_generations = 1000
@@ -48,7 +38,8 @@ def main():
     solution = ga.run()
     print(f'the solution is:\n{sat_info.choose_list(solution[0])}\n{solution}\n')
     print(f'the number of the solution is {sum(solution[0])}')
-    print(f'valid the solution is {sat_info.all_j_subsets_covered(sat_info.choose_list(solution[0]))}')
+    # print(f'valid the solution is {sat_info.all_j_subsets_covered(sat_info.choose_list(solution[0]))}')
+    print(f'valid the solution is {sat_info.all_j_subsets_covered(solution[0])}')
     print(f'the time run is {perf_counter() - start_time} second')
 
     Y_history = pd.DataFrame(ga.all_history_Y)
