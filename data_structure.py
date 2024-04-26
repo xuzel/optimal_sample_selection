@@ -49,7 +49,12 @@ class SatInfo:
 
 def fitness_func_with_param(set_info: SatInfo):
     def fitness_func(solution):
-        solution = [round(x) for x in solution]
+        fix_solution = list()
+        for x in fix_solution:
+            if x < 0.5:
+                fix_solution.append(0)
+            else:
+                fix_solution.append(1)
         if set_info.all_j_subsets_covered(solution):
             return sum(solution)
         else:
@@ -66,3 +71,7 @@ TEST_SET = [SatInfo(45, 7, 6, 5, 5),
             # SatInfo()
 
             ]
+
+
+def hash_function(x):
+    return x - 1
