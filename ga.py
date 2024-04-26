@@ -1,5 +1,5 @@
 import numpy as np
-from data_structure import SatInfo, fitness_func_with_param
+from data_structure import SatInfo, fitness_func_with_param, TEST_SET, hash_function
 from sko.GA import GA
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -19,7 +19,7 @@ from time import perf_counter
 
 def main():
     start_time = perf_counter()
-    sat_info = SatInfo(45, 7, 6, 5, 5)
+    sat_info = TEST_SET[hash_function(4)]
     gene_size = sat_info.get_input_len()
     print(gene_size)
     num_generations = 1000
