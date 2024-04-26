@@ -62,16 +62,4 @@ def fitness_func_with_param(set_info: SatInfo):
 
     return fitness_func
 
-TEST_SET = [SatInfo(45, 7, 6, 5, 5),
-            SatInfo(45, 8, 6, 4, 4),
-            SatInfo(45, 9, 6, 4, 4),
-            SatInfo(45, 8, 6, 6, 5),
-            SatInfo(45, 9, 6, 5, 4),
-            SatInfo(45, 10, 6, 6, 4),
-            # SatInfo()
 
-            ]
-
-
-def hash_function(x):
-    return x - 1
