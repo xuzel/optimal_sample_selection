@@ -46,6 +46,15 @@ class SatInfo:
         covered_j_subsets = set(itertools.chain(*[self.graph[k] for k in solution]))
         return covered_j_subsets == all_j_subsets
 
+    def greedy_set_cover(self):
+        covered = set()
+        selected_k_combs = []
+        while any(j_sub not in covered for j_subsets in self.graph.values() for j_sub in j_subsets):
+            best_k_comb = max(self.graph, key=lambda k: len(set(self.graph[k]) - covered))
+            selected_k_combs.append(best_k_comb)
+            covered.update(self.graph[best_k_comb])
+        return selected_k_combs
+
 
 def fitness_func_with_param(set_info: SatInfo):
     def fitness_func(solution):
@@ -56,7 +65,7 @@ def fitness_func_with_param(set_info: SatInfo):
             else:
                 fix_solution.append(1)
         if set_info.all_j_subsets_covered(solution):
-            return sum(solution)
+            return float(sum(solution))
         else:
             return math.inf
 
