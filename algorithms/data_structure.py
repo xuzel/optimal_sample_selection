@@ -85,7 +85,7 @@ class Result:
         self.run_time = run_time
         self.y_history = y_history
 
-    def print_result(self, draw_pic: bool):
+    def print_result(self, draw_pic: bool = False):
         print('*' * 100)
         print(f"using algorithm: {self.algorithm}")
         print(f"the solution is: {self.solution}")
