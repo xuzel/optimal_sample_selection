@@ -31,8 +31,6 @@ def all_j_subsets_covered(cover_graph, solution):
 
 
 def simulated_annealing(cover_graph, n_numbers, T=10000, T_min=0.001, alpha=0.99, time_limit=8):
-    print("Switching to greedy algorithm due to time limit.")
-    return greedy_set_cover(cover_graph)
     start_time = time.time()
     k_combinations = list(cover_graph.keys())
     random.shuffle(k_combinations)

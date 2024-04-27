@@ -1,3 +1,4 @@
+import math
 import numpy
 import itertools
 import typing
@@ -39,9 +40,35 @@ class SatInfo:
 
     def all_j_subsets_covered(self, solution):
         # solution = self.choose_list(solution)
-        if type(solution[0]) is numpy.float64:
+        if type(solution[0]) is numpy.float64 or int:
             solution = self.choose_list(solution)
         all_j_subsets = set(itertools.chain(*self.graph.values()))
         covered_j_subsets = set(itertools.chain(*[self.graph[k] for k in solution]))
         return covered_j_subsets == all_j_subsets
+
+    def greedy_set_cover(self):
+        covered = set()
+        selected_k_combs = []
+        while any(j_sub not in covered for j_subsets in self.graph.values() for j_sub in j_subsets):
+            best_k_comb = max(self.graph, key=lambda k: len(set(self.graph[k]) - covered))
+            selected_k_combs.append(best_k_comb)
+            covered.update(self.graph[best_k_comb])
+        return selected_k_combs
+
+
+def fitness_func_with_param(set_info: SatInfo):
+    def fitness_func(solution):
+        fix_solution = list()
+        for x in fix_solution:
+            if x < 0.5:
+                fix_solution.append(0)
+            else:
+                fix_solution.append(1)
+        if set_info.all_j_subsets_covered(solution):
+            return float(sum(solution))
+        else:
+            return math.inf
+
+    return fitness_func
+
 
