@@ -16,11 +16,11 @@ class SatInfo:
         self.all_j_set = data_order(itertools.combinations(self.n_set, j))
         self.all_s_set = [data_order(itertools.combinations(each_j, s)) for each_j in self.all_j_set]
         self.graph = self.subset_cover_graph(k, j, s)
-        if DEBUG:
-            print(f"all j set: \n{self.all_j_set}\n")
-            print(f"all k set: \n{self.all_k_set}\n")
-            print(f"all n set: \n{self.n_set}\n")
-            print(f"all s set: \n{self.all_s_set}\n")
+        # if DEBUG:
+        #     print(f"all j set: \n{self.all_j_set}\n")
+        #     print(f"all k set: \n{self.all_k_set}\n")
+        #     print(f"all n set: \n{self.n_set}\n")
+        #     print(f"all s set: \n{self.all_s_set}\n")
 
     def get_input_len(self):
         return len(self.all_k_set)
