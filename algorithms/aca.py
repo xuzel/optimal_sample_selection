@@ -5,6 +5,7 @@ from scipy import spatial
 import pandas as pd
 import matplotlib.pyplot as plt
 from time import perf_counter
+from tqdm import tqdm
 
 from .data_structure import SatInfo, fitness_func_with_param
 from .utils import TEST_SET, hash_function, save_result_to_file
@@ -60,54 +61,57 @@ def main(iteration, param_version, output_folder):
     algorithm = 'ACA'
 
     start_time = perf_counter()
-    sat_info = TEST_SET[hash_function(2)]
 
-    n_dim = sat_info.get_input_len()
-    size_pop = 50
-    max_iter = 200
-    alpha = 1
-    beta = 2
-    rho = 0.1
+    for i in tqdm(range(1, 7)):
+        sat_info = TEST_SET[hash_function(i)]
 
-    aca = ACABinary(
-        func=fitness_func_with_param(sat_info),
-        n_dim=n_dim,
-        size_pop=size_pop,
-        max_iter=max_iter,
-        alpha=alpha,
-        beta=beta,
-        rho=rho
-    )
-    solution = aca.run()[0]
-    end_time = perf_counter()
-    run_time = perf_counter() - start_time
+        n_dim = sat_info.get_input_len()
+        size_pop = 50
+        max_iter = 200
+        alpha = 1
+        beta = 2
+        rho = 0.1
 
-    result = {
-        'n_dim': n_dim,
-        'size_pop': size_pop,
-        'max_iter': max_iter,
-        'alpha': alpha,
-        'beta': beta,
-        'rho': rho,
-        'solution': sum(solution),
-        'time': run_time
-    }
-    save_result_to_file(algorithm, iteration, param_version, result, output_folder, aca)
+        aca = ACABinary(
+            func=fitness_func_with_param(sat_info),
+            n_dim=n_dim,
+            size_pop=size_pop,
+            max_iter=max_iter,
+            alpha=alpha,
+            beta=beta,
+            rho=rho
+        )
+        solution = aca.run()[0]
+        end_time = perf_counter()
+        run_time = perf_counter() - start_time
 
-    if Debug:
-        print(f'the solution is:\n{sat_info.choose_list(solution)}\n{solution}\n')
-        print(f'the number of the solution is {sum(solution)}')
-        print(f'valid the solution is {sat_info.all_j_subsets_covered(solution)}')
-        print(f"run time: {end_time - start_time} seconds")
-        print(len(aca.generation_best_Y))
-        plt.figure(figsize=(10, 5))  # 设置图像大小
-        plt.plot(aca.generation_best_Y, marker='o', linestyle='-', color='b')  # 折线图，标记数据点
-        plt.title('Data Variation')  # 图像标题
-        plt.xlabel('ite')  # x轴标签
-        plt.ylabel('fit')  # y轴标签
+        result = {
+            'qusetion_num': i,
+            'n_dim': n_dim,
+            'size_pop': size_pop,
+            'max_iter': max_iter,
+            'alpha': alpha,
+            'beta': beta,
+            'rho': rho,
+            'solution': sum(solution),
+            'time': run_time
+        }
+        save_result_to_file(algorithm, iteration, param_version, result, output_folder, aca, qusetion_num=i)
 
-        # 显示图像
-        plt.show()
+        if Debug:
+            print(f'the solution is:\n{sat_info.choose_list(solution)}\n{solution}\n')
+            print(f'the number of the solution is {sum(solution)}')
+            print(f'valid the solution is {sat_info.all_j_subsets_covered(solution)}')
+            print(f"run time: {end_time - start_time} seconds")
+            print(len(aca.generation_best_Y))
+            plt.figure(figsize=(10, 5))  # 设置图像大小
+            plt.plot(aca.generation_best_Y, marker='o', linestyle='-', color='b')  # 折线图，标记数据点
+            plt.title('Data Variation')  # 图像标题
+            plt.xlabel('ite')  # x轴标签
+            plt.ylabel('fit')  # y轴标签
+
+            # 显示图像
+            plt.show()
 
 
 # if __name__ == '__main__':
