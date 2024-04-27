@@ -1,10 +1,11 @@
 from copy import deepcopy
 
 import matplotlib.pyplot as plt
-from data_structure import SatInfo, fitness_func_with_param
-from utils import TEST_SET, hash_function
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function
 from time import perf_counter
 import numpy as np
+import typing
 
 
 class AFSA:
@@ -95,6 +96,43 @@ class AFSA:
         return self.best_x, self.best_y
 
 
+def run_asfa(sample_parm: typing.List[int],
+             size_pop=50,
+             max_iter=100,
+             max_try_num=100,
+             step=1,
+             visual=3,
+             q=0.98,
+             delta=0.5):
+    start_time = perf_counter()
+    sat_info = SatInfo(*sample_parm)
+    n_dim = sat_info.get_input_len()
+    afsa = AFSA(
+        func=fitness_func_with_param(sat_info),
+        n_dim=n_dim,
+        size_pop=size_pop,
+        max_iter=max_iter,
+        max_try_num=max_try_num,
+        step=step,
+        visual=visual,
+        q=q,
+        delta=delta
+    )
+    solution = afsa.run()
+    solution = [round(x) for x in solution[0]]
+    end_time = perf_counter()
+    result = Result(
+        solution=sat_info.choose_list(solution),
+        solution_num=sum(solution),
+        algorithm='afsa',
+        encoder_solution=solution,
+        valid=sat_info.all_j_subsets_covered(solution),
+        run_time=end_time - start_time,
+        y_history=afsa.history
+    )
+    return result
+
+
 def main():
     start_time = perf_counter()
     sat_info = TEST_SET[hash_function(3)]
@@ -102,7 +140,7 @@ def main():
     afsa = AFSA(fitness_func_with_param(sat_info),
                 n_dim=n_dim,
                 size_pop=50,
-                max_iter=100,
+                max_iter=30,
                 max_try_num=100,
                 step=1,
                 visual=3,
@@ -123,4 +161,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    run_asfa(
+        [45, 8, 6, 4, 4]
+    ).print_result(True)
+
