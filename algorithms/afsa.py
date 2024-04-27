@@ -2,6 +2,7 @@ from copy import deepcopy
 import matplotlib.pyplot as plt
 from time import perf_counter
 import numpy as np
+from tqdm import tqdm
 
 from .data_structure import SatInfo, fitness_func_with_param
 from .utils import TEST_SET, hash_function, save_result_to_file
@@ -99,55 +100,58 @@ def main(iteration, param_version, output_folder):
     algorithm = 'AFSA'
 
     start_time = perf_counter()
-    sat_info = TEST_SET[hash_function(3)]
 
-    n_dim = sat_info.get_input_len()
-    size_pop = 50
-    max_iter = 100
-    max_try_num = 100
-    step = 1
-    visual = 3
-    q = 0.98
-    delta = 0.5
+    for i in tqdm(range(1, 7)):
+        sat_info = TEST_SET[hash_function(i)]
 
-    afsa = AFSA(fitness_func_with_param(sat_info),
-                n_dim=n_dim,
-                size_pop=size_pop,
-                max_iter=max_iter,
-                max_try_num=max_try_num,
-                step=step,
-                visual=visual,
-                q=q,
-                delta=delta)
-    solution = afsa.run()
-    end_time = perf_counter()
-    run_time = perf_counter() - start_time
-    solution = [round(x) for x in solution[0]]
+        n_dim = sat_info.get_input_len()
+        size_pop = 50
+        max_iter = 100
+        max_try_num = 100
+        step = 1
+        visual = 3
+        q = 0.98
+        delta = 0.5
 
-    result = {
-        'n_dim': n_dim,
-        'size_pop': size_pop,
-        'max_iter': max_iter,
-        'max_try_num': max_try_num,
-        'step': step,
-        'visual': visual,
-        'q': q,
-        'delta': delta,
-        'solution': sum(solution),
-        'time': run_time
-    }
-    save_result_to_file(algorithm, iteration, param_version, result, output_folder, afsa)
+        afsa = AFSA(fitness_func_with_param(sat_info),
+                    n_dim=n_dim,
+                    size_pop=size_pop,
+                    max_iter=max_iter,
+                    max_try_num=max_try_num,
+                    step=step,
+                    visual=visual,
+                    q=q,
+                    delta=delta)
+        solution = afsa.run()
+        end_time = perf_counter()
+        run_time = perf_counter() - start_time
+        solution = [round(x) for x in solution[0]]
 
-    if Debug:
-        # print(solution)
-        print(solution[0])
-        print(f'the solution is:\n{sat_info.choose_list(solution)}\n{solution}\n')
-        print(f'the number of the solution is {sum(solution)}')
-        print(f'valid the solution is {sat_info.all_j_subsets_covered(solution)}')
+        result = {
+            'qusetion_num': i,
+            'n_dim': n_dim,
+            'size_pop': size_pop,
+            'max_iter': max_iter,
+            'max_try_num': max_try_num,
+            'step': step,
+            'visual': visual,
+            'q': q,
+            'delta': delta,
+            'solution': sum(solution),
+            'time': run_time
+        }
+        save_result_to_file(algorithm, iteration, param_version, result, output_folder, afsa, qusetion_num=i)
 
-        print(f"run time: {end_time - start_time} seconds")
-        plt.plot(afsa.history)
-        plt.show()
+        if Debug:
+            # print(solution)
+            print(solution[0])
+            print(f'the solution is:\n{sat_info.choose_list(solution)}\n{solution}\n')
+            print(f'the number of the solution is {sum(solution)}')
+            print(f'valid the solution is {sat_info.all_j_subsets_covered(solution)}')
+
+            print(f"run time: {end_time - start_time} seconds")
+            plt.plot(afsa.history)
+            plt.show()
 
 
 if __name__ == '__main__':
