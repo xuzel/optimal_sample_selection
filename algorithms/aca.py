@@ -9,7 +9,6 @@ from .data_structure import SatInfo, fitness_func_with_param, Result
 from .utils import TEST_SET, hash_function
 
 
-
 class ACABinary:
     def __init__(self, func, n_dim, size_pop=10, max_iter=20, alpha=1, beta=2, rho=0.1):
         self.generation_best_Y = list()
@@ -54,7 +53,6 @@ class ACABinary:
                 self.best_path = best_path
 
         return self.best_path, self.best_cost
-
 
 
 def run_aca(sample_parm: typing.List[int],
@@ -124,4 +122,3 @@ if __name__ == '__main__':
     run_aca(
         [45, 8, 6, 4, 4]
     ).print_result(True)
-

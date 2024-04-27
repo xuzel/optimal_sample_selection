@@ -8,9 +8,8 @@ from collections import defaultdict
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
 data_order = list
-DEBUG = True
+DEBUG = False
 
 
 class SatInfo:
@@ -26,7 +25,6 @@ class SatInfo:
             print(f"all k set: \n{self.all_k_set}\n")
             print(f"all n set: \n{self.n_set}\n")
             print(f"all s set: \n{self.all_s_set}\n")
-
 
     def get_input_len(self):
         return len(self.all_k_set)
@@ -88,10 +86,13 @@ class Result:
         self.y_history = y_history
 
     def print_result(self, draw_pic: bool):
+        print('*' * 100)
+        print(f"using algorithm: {self.algorithm}")
         print(f"the solution is: {self.solution}")
         print(f"the number of the solution is: {self.solution_num}")
         print(f"the solution is: {self.valid}")
         print(f"the run time is: {self.run_time}")
+        print('*' * 100, end='\n\n')
         if draw_pic:
             if self.algorithm == 'ga':
                 fig, ax = plt.subplots(2, 1)
@@ -131,4 +132,3 @@ def fitness_func_with_param(set_info: SatInfo):
             return math.inf
 
     return fitness_func
-
