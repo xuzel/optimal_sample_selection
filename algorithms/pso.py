@@ -1,65 +1,78 @@
 from sko.PSO import PSO
 import matplotlib.pyplot as plt
+
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function
 from time import perf_counter
-from tqdm import tqdm
+import typing
 
-from .data_structure import SatInfo, fitness_func_with_param
-from .utils import TEST_SET, hash_function,save_result_to_file
 
-def main(iteration, param_version, output_folder):
-    Debug = False
-    algorithm = 'PSO'
-
+def run_pso(sample_parm: typing.List[int],
+            pop=1000,
+            max_iter=200,
+            w=0.9,
+            c1=2,
+            c2=2):
     start_time = perf_counter()
-
-    for i in tqdm(range(1, 7)):
-        sat_info = TEST_SET[hash_function(i)]
-
-        n_dim = sat_info.get_input_len()
-        pop = 200
-        max_iter = 200
-        w = 0.9
-        c1 = 2
-        c2 = 2
-
-        pso = PSO(func=fitness_func_with_param(sat_info),
-                n_dim=n_dim,
-                pop=pop,
-                max_iter=max_iter,
-                lb=[0] * n_dim,
-                ub=[1] * n_dim,
-                w=w,
-                c1=c1,
-                c2=c2)
-
-        solution = pso.run()
-        end_time = perf_counter()
-        run_time = perf_counter() - start_time
-        solution = [round(x) for x in solution[0]]
-
-        result = {
-            'n_dim': n_dim,
-            'pop': pop,
-            'max_iter': max_iter,
-            'w': w,
-            'c1': c1,
-            'c2': c2,
-            'solution': sum(solution),
-            'time': run_time
-        }
-        save_result_to_file(algorithm, iteration, param_version, result, output_folder, pso, qusetion_num=i)
-
-        if Debug:
-            # print(solution)
-            print(f'the solution is:\n{sat_info.choose_list(solution)}\n{solution}\n')
-            print(f'the number of the solution is {sum(solution)}')
-            print(f'valid the solution is {sat_info.all_j_subsets_covered(solution)}')
-
-            print(f"run time: {end_time - start_time} seconds")
-
-            plt.plot(pso.gbest_y_hist)
-            plt.show()
+    sat_info = SatInfo(*sample_parm)
+    n_dim = sat_info.get_input_len()
+    pso = PSO(
+        func=fitness_func_with_param(sat_info),
+        n_dim=n_dim,
+        pop=pop,
+        max_iter=max_iter,
+        lb=[0] * n_dim,
+        ub=[1] * n_dim,
+        w=w,
+        c1=c1,
+        c2=c2
+    )
+    solution = pso.run()[0]
+    solution = [round(x) for x in solution]
+    end_time = perf_counter()
+    result = Result(
+        solution=sat_info.choose_list(solution),
+        solution_num=sum(solution),
+        algorithm='pso',
+        encoder_solution=solution,
+        valid=sat_info.all_j_subsets_covered(solution),
+        run_time=end_time - start_time,
+        y_history=pso.gbest_y_hist
+    )
+    return result
 
 
-# if __name__ == '__main__':
-#     main()
+def main():
+    start_time = perf_counter()
+    sat_info = TEST_SET[hash_function(4)]
+    n_dim = sat_info.get_input_len()
+
+    pso = PSO(func=fitness_func_with_param(sat_info),
+              n_dim=n_dim,
+              pop=200,
+              max_iter=200,
+              lb=[0] * n_dim,
+              ub=[1] * n_dim,
+              w=0.9,
+              c1=2,
+              c2=2)
+
+    solution = pso.run()
+    end_time = perf_counter()
+    print(solution[0])
+    solution = [round(x) for x in solution[0]]
+    # print(solution)
+    print(f'the solution is:\n{sat_info.choose_list(solution)}\n{solution}\n')
+    print(f'the number of the solution is {sum(solution)}')
+    print(f'valid the solution is {sat_info.all_j_subsets_covered(solution)}')
+    print(f"run time: {end_time - start_time} seconds")
+
+    plt.plot(pso.gbest_y_hist)
+    plt.show()
+
+
+if __name__ == '__main__':
+    run_pso(
+        [45, 8, 6, 4, 4]
+    ).print_result(True)
+
