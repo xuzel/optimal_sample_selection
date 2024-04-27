@@ -1,5 +1,6 @@
 from .data_structure import SatInfo
 
+
 TEST_SET = [
     SatInfo(45, 7, 6, 5, 5),
     SatInfo(45, 8, 6, 4, 4),
