@@ -1,5 +1,6 @@
 from sko.PSO import PSO
 import matplotlib.pyplot as plt
+
 from .data_structure import SatInfo, fitness_func_with_param, Result
 from .utils import TEST_SET, hash_function
 from time import perf_counter
@@ -74,3 +75,4 @@ if __name__ == '__main__':
     run_pso(
         [45, 8, 6, 4, 4]
     ).print_result(True)
+

@@ -1,11 +1,14 @@
 import numpy as np
+
 from .data_structure import SatInfo, fitness_func_with_param, Result
 from .utils import TEST_SET, hash_function
+
 from sko.GA import GA
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
 from time import perf_counter
+
 import typing
 from copy import deepcopy
 
