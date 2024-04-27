@@ -1,13 +1,11 @@
 from copy import deepcopy
 
-
 import matplotlib.pyplot as plt
 from .data_structure import SatInfo, fitness_func_with_param, Result
 from .utils import TEST_SET, hash_function
 from time import perf_counter
 import numpy as np
 import typing
-
 
 
 class AFSA:
@@ -98,7 +96,6 @@ class AFSA:
         return self.best_x, self.best_y
 
 
-
 def run_asfa(sample_parm: typing.List[int],
              size_pop=50,
              max_iter=100,
@@ -167,5 +164,3 @@ if __name__ == '__main__':
     run_asfa(
         [45, 8, 6, 4, 4]
     ).print_result(True)
-
-
