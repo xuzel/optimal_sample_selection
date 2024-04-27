@@ -1,12 +1,12 @@
+import typing
 from copy import deepcopy
-
-import numpy as np
-from scipy import spatial
-import pandas as pd
-import matplotlib.pyplot as plt
-from data_structure import SatInfo, fitness_func_with_param
-from utils import TEST_SET, hash_function
 from time import perf_counter
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function
 
 
 class ACABinary:
@@ -55,6 +55,38 @@ class ACABinary:
         return self.best_path, self.best_cost
 
 
+def run_aca(sample_parm: typing.List[int],
+            size_pop: int = 50,
+            max_iter: int = 200,
+            alpha: int = 1,
+            beta: int = 2,
+            rho: float = 0.1):
+    start_time = perf_counter()
+    sat_info = SatInfo(*sample_parm)
+    n_dim = sat_info.get_input_len()
+    aca = ACABinary(
+        func=fitness_func_with_param(sat_info),
+        n_dim=n_dim,
+        size_pop=size_pop,
+        max_iter=max_iter,
+        alpha=alpha,
+        beta=beta,
+        rho=rho
+    )
+    solution = aca.run()[0]
+    end_time = perf_counter()
+    result = Result(
+        solution=sat_info.choose_list(solution),
+        solution_num=sum(solution),
+        algorithm='aca',
+        encoder_solution=solution,
+        valid=sat_info.all_j_subsets_covered(solution),
+        run_time=end_time - start_time,
+        y_history=aca.generation_best_Y
+    )
+    return result
+
+
 def main():
     start_time = perf_counter()
     sat_info = TEST_SET[hash_function(2)]
@@ -86,4 +118,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    run_aca(
+        [45, 8, 6, 4, 4]
+    ).print_result(True)
