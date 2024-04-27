@@ -28,7 +28,6 @@ def main():
     print(f'the solution is:\n{sat_info.choose_list(solution)}\n{solution}\n')
     print(f'the number of the solution is {sum(solution)}')
     print(f'valid the solution is {sat_info.all_j_subsets_covered(solution)}')
-
     print(f"run time: {end_time - start_time} seconds")
 
     plt.plot(pso.gbest_y_hist)
