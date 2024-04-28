@@ -1,16 +1,17 @@
 from sko.PSO import PSO
 import matplotlib.pyplot as plt
-
-from data_structure import SatInfo, fitness_func_with_param, Result
-from utils import TEST_SET, hash_function
+import numpy as np
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function, replace_rows_randomly
 from time import perf_counter
 import typing
 
 
 def run_pso(sample_parm: typing.List[int],
             greedy_init=True,
-            pop=1000, #改成2000效果不明显，但是时间会慢
-            max_iter=50,
+            greedy_replace_probability=0.01,
+            pop=1000,
+            max_iter=100,
             w=0.9,
             c1=5,
             c2=5):
@@ -28,16 +29,19 @@ def run_pso(sample_parm: typing.List[int],
         c1=c1,
         c2=c2
     )
-    print(pso.X)
     if greedy_init:
-        pso.X = sat_info.encoder_greedy_solution()
-        print(pso.X)
+        # print(pso.X)
+        # print(sum(sat_info.encoder_greedy_solution()))
+        greedy_solution = np.array(sat_info.encoder_greedy_solution())
+        pso.X = replace_rows_randomly(pso.X, greedy_replace_probability, greedy_solution)
+        # print(pso.X)
     solution = pso.run()[0]
     solution = [round(x) for x in solution]
     end_time = perf_counter()
     result = Result(
         solution=sat_info.choose_list(solution),
         solution_num=sum(solution),
+        input_parm=sample_parm,
         algorithm='pso',
         encoder_solution=solution,
         valid=sat_info.all_j_subsets_covered(solution),
@@ -80,4 +84,3 @@ if __name__ == '__main__':
     run_pso(
         [45, 9, 6, 4, 4]
     ).print_result(True)
-
