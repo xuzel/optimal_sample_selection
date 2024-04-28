@@ -31,6 +31,8 @@ def run_sa(sample_parm: typing.List[int],
         max_stay_counter=max_stay_counter
     )
     solution = sa.run()[0]
+    if type(solution) is np.ndarray:
+        solution = solution.tolist()
     solution = [round(x) for x in solution]
     end_time = perf_counter()
     result = Result(
