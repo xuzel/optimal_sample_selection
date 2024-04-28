@@ -11,10 +11,10 @@ import typing
 
 def run_sa(sample_parm: typing.List[int],
            random_init=False,
-           T_max=1,
+           T_max=100,
            T_min=1e-9,
            L=300,
-           max_stay_counter=150):
+           max_stay_counter=350):
     start_time = perf_counter()
     sat_info = SatInfo(*sample_parm)
     n_dim = sat_info.get_input_len()
