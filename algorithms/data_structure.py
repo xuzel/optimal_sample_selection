@@ -116,7 +116,7 @@ class Result:
             plt.suptitle(self.title, fontsize=12, color='purple', fontweight='bold')
             plt.show()
 
-    def save_fit_func_pic(self, file_name):
+    def save_fit_func_pic(self, file_path, file_name):
         plt.title(self.title)
         if self.algorithm == 'ga':
             fig, ax = plt.subplots(2, 1)
@@ -129,7 +129,9 @@ class Result:
         plt.suptitle(self.title, fontsize=12, color='purple', fontweight='bold')
         file_name_format = self.title.replace(' ', '')
         file_name_format = file_name_format.replace(',', '-')
-        plt.savefig(f"{file_name}-{file_name_format}.jpg")
+        if not os.path.exists(file_path):
+            os.makedirs(file_path, exist_ok=True)
+        plt.savefig(os.path.join(file_path, f"{file_name}-{file_name_format}.jpg"))
 
 
 def fitness_func_with_param(set_info: SatInfo):
