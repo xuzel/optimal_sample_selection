@@ -1,17 +1,17 @@
 from copy import deepcopy
 
 import matplotlib.pyplot as plt
-from .data_structure import SatInfo, fitness_func_with_param, Result
-from .utils import TEST_SET, hash_function
+from data_structure import SatInfo, fitness_func_with_param, Result
+from utils import TEST_SET, hash_function
 from time import perf_counter
 import numpy as np
 import typing
 
 
 class AFSA:
-    def __init__(self, func, n_dim, size_pop=50, max_iter=300,
-                 max_try_num=100, step=1, visual=3,
-                 q=0.98, delta=0.5):
+    def __init__(self, func, n_dim, size_pop=100, max_iter=1000,
+                 max_try_num=100, step=1, visual=5,
+                 q=0.98, delta=0.6):
         self.func = func
         self.n_dim = n_dim
         self.size_pop = size_pop
@@ -163,5 +163,5 @@ def main():
 
 if __name__ == '__main__':
     run_asfa(
-        [45, 9, 6, 4, 4]
+        [45, 12, 6, 6, 4]
     ).print_result(True)
