@@ -5,12 +5,12 @@ from time import perf_counter
 import matplotlib.pyplot as plt
 import numpy as np
 
-from .data_structure import SatInfo, fitness_func_with_param, Result
-from .utils import TEST_SET, hash_function
+from data_structure import SatInfo, fitness_func_with_param, Result
+from utils import TEST_SET, hash_function
 
 
 class ACABinary:
-    def __init__(self, func, n_dim, size_pop=10, max_iter=20, alpha=1, beta=2, rho=0.1):
+    def __init__(self, func, n_dim, size_pop=100, max_iter=50, alpha=2, beta=2, rho=0.15):
         self.generation_best_Y = list()
         self.best_path = None
         self.best_cost = None
@@ -121,5 +121,5 @@ def main():
 if __name__ == '__main__':
     # main()
     run_aca(
-        [45, 8, 6, 4, 4]
+        [45, 9, 6, 4, 4]
     ).print_result(True)
