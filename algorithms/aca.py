@@ -5,8 +5,8 @@ from time import perf_counter
 import matplotlib.pyplot as plt
 import numpy as np
 
-from data_structure import SatInfo, fitness_func_with_param, Result
-from utils import TEST_SET, hash_function
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function
 
 
 class ACABinary:
@@ -76,11 +76,11 @@ def run_aca(sample_parm: typing.List[int],
     solution = aca.run()[0]
     end_time = perf_counter()
     result = Result(
-        solution=sat_info.choose_list(solution),
+        solution=sat_info.choose_list(solution.tolist()),
         input_parm=sample_parm,
         solution_num=sum(solution),
         algorithm='aca',
-        encoder_solution=solution,
+        encoder_solution=solution.tolist(),
         valid=sat_info.all_j_subsets_covered(solution),
         run_time=end_time - start_time,
         y_history=aca.generation_best_Y
