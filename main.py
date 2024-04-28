@@ -22,5 +22,5 @@ from algorithms import *
 
 result = run_ga([45, 8, 6, 4, 4], auto_parm=True, greedy_init=True, max_iter=200, greedy_replace_probability=0.005)
 result.print_result(True)
-result.save_fit_func_pic('./test')
+result.save_fit_func_pic('./test_result', 'test')
 
