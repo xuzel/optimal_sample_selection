@@ -28,9 +28,9 @@ def save_result_to_file(algorithms_name, iteration, param_version, result, outpu
     fieldnames_dict = {
         'GA': ['qusetion_num', 'gene_size', 'num_generations', 'prob_mut', 'size_pop', 'solution', 'time'],
         'PSO': ['qusetion_num', 'n_dim', 'pop', 'max_iter', 'w', 'c1', 'c2', 'solution', 'time'],
-        'SA': ['qusetion_num', 'x0', 'T_max', 'T_min', 'L', 'max_stay_counter', 'solution', 'time'],
+        'SA': ['qusetion_num', 'T_max', 'T_min', 'L', 'max_stay_counter', 'solution', 'time'],
         'ACA': ['qusetion_num', 'n_dim', 'size_pop', 'max_iter', 'alpha', 'beta', 'rho', 'solution', 'time'],
-        'AFSA': ['qusetion_num', 'n_dim', 'size_pop', 'max_iter', 'alpha', 'beta', 'rho', 'solution', 'time']
+        'AFSA': ['qusetion_num','n_dim', 'size_pop','max_iter', 'max_try_num','step','visual','q','delta','solution','time']
     }
 
     fieldnames = fieldnames_dict[algorithms_name]

@@ -20,7 +20,7 @@ def test_algorithm(algorithm_main, iteration, param_version, output_folder):
     algorithm_main(iteration, param_version)
 
 if __name__ == '__main__':
-    # algorithms = [ga_main, pso_main, sa_main, aca_main, ia_main, afsa_main]
+    # algorithms = [ga_main, pso_main, sa_main, aca_main, afsa_main]
     algorithms = [ga_main]
     param_versions = [1]  # Change this for different parameter versions
     tester = AlgorithmTester(algorithms, param_versions)
