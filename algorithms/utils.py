@@ -1,4 +1,4 @@
-from .data_structure import SatInfo
+from data_structure import SatInfo
 
 
 TEST_SET = [
