@@ -1,7 +1,7 @@
 import numpy as np
 
 from .data_structure import SatInfo, fitness_func_with_param, Result
-from .utils import TEST_SET, hash_function
+from .utils import TEST_SET, hash_function, replace_rows_randomly
 
 from sko.GA import GA
 import pandas as pd
@@ -13,19 +13,9 @@ import typing
 from copy import deepcopy
 
 
-def replace_rows_randomly(original_array, replace_probability, replacement_array):
-    num_rows = original_array.shape[0]
-    rows_to_replace = int(np.round(num_rows * replace_probability))
-    rows_to_replace = max(1, rows_to_replace)
-    rows_indices = np.random.choice(num_rows, size=rows_to_replace, replace=False)
-    for row_index in rows_indices:
-        original_array[row_index, :] = replacement_array
-    return original_array
-
-
 def run_ga(sample_parm: typing.List[int],
-           size_pop: int = 100,
-           max_iter: int = 1000,
+           size_pop: int = 50,
+           max_iter: int = 50,
            prob_mut=0.01,
            auto_parm=True,
            greedy_init=True,
@@ -37,6 +27,8 @@ def run_ga(sample_parm: typing.List[int],
         weight = 15
         size_pop = int(math.sqrt(n_dim) * weight)
         size_pop = size_pop if size_pop % 2 == 0 else size_pop + 1
+        if size_pop > 200:
+            size_pop = 200
         # print(size_pop)
     ga = GA(
         func=fitness_func_with_param(sat_info),

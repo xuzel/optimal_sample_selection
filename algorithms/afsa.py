@@ -162,5 +162,5 @@ def main():
 
 if __name__ == '__main__':
     run_asfa(
-        [45, 8, 6, 4, 4]
+        [45, 9, 6, 4, 4]
     ).print_result(True)
