@@ -7,6 +7,7 @@ from collections import defaultdict
 
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
 
 data_order = list
 DEBUG = False
@@ -72,6 +73,7 @@ class Result:
     def __init__(self,
                  solution: typing.List,
                  solution_num: int,
+                 input_parm: typing.List,
                  algorithm: str,
                  encoder_solution: typing.List,
                  valid: bool,
@@ -79,11 +81,20 @@ class Result:
                  y_history: typing.Union[typing.List, pd.DataFrame]):
         self.solution = solution
         self.solution_num = solution_num
+        self.input_parm = input_parm
         self.algorithm = algorithm
         self.encoder_solution = encoder_solution
         self.valid = valid
         self.run_time = run_time
         self.y_history = y_history
+        self.title = (f"m: {self.input_parm[0]}, "
+                      f"n: {self.input_parm[1]}, "
+                      f"k: {self.input_parm[2]}, "
+                      f"j: {self.input_parm[3]}, "
+                      f"s: {self.input_parm[4]}, "
+                      f"alg: {self.algorithm}, "
+                      f"num_sol: {self.solution_num}, "
+                      f"valid: {self.valid}")
 
     def print_result(self, draw_pic: bool = False):
         print('*' * 100)
@@ -98,15 +109,15 @@ class Result:
                 fig, ax = plt.subplots(2, 1)
                 ax[0].plot(self.y_history.index, self.y_history.values, '.', color='red')
                 self.y_history.min(axis=1).cummin().plot(kind='line')
-                plt.show()
             elif self.algorithm == 'sa':
                 plt.plot(pd.DataFrame(self.y_history).cummin(axis=0))
-                plt.show()
             else:
                 plt.plot(self.y_history)
-                plt.show()
+            plt.suptitle(self.title, fontsize=12, color='purple', fontweight='bold')
+            plt.show()
 
     def save_fit_func_pic(self, file_name):
+        plt.title(self.title)
         if self.algorithm == 'ga':
             fig, ax = plt.subplots(2, 1)
             ax[0].plot(self.y_history.index, self.y_history.values, '.', color='red')
@@ -115,7 +126,10 @@ class Result:
             plt.plot(pd.DataFrame(self.y_history).cummin(axis=0))
         else:
             plt.plot(self.y_history)
-        plt.savefig(file_name)
+        plt.suptitle(self.title, fontsize=12, color='purple', fontweight='bold')
+        file_name_format = self.title.replace(' ', '')
+        file_name_format = file_name_format.replace(',', '-')
+        plt.savefig(f"{file_name}-{file_name_format}.jpg")
 
 
 def fitness_func_with_param(set_info: SatInfo):
