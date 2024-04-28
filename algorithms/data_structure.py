@@ -80,7 +80,7 @@ class Result:
                  run_time: float,
                  y_history: typing.Union[typing.List, pd.DataFrame]):
         self.solution = solution
-        self.solution_num = solution_num
+        self.solution_num = int(solution_num)
         self.input_parm = input_parm
         self.algorithm = algorithm
         self.encoder_solution = encoder_solution
@@ -115,9 +115,10 @@ class Result:
                 plt.plot(self.y_history)
             plt.suptitle(self.title, fontsize=12, color='purple', fontweight='bold')
             plt.show()
+        return self
 
     def save_fit_func_pic(self, file_path, file_name):
-        plt.title(self.title)
+        # plt.title(self.title)
         if self.algorithm == 'ga':
             fig, ax = plt.subplots(2, 1)
             ax[0].plot(self.y_history.index, self.y_history.values, '.', color='red')
@@ -132,6 +133,7 @@ class Result:
         if not os.path.exists(file_path):
             os.makedirs(file_path, exist_ok=True)
         plt.savefig(os.path.join(file_path, f"{file_name}-{file_name_format}.jpg"))
+        plt.close()
 
 
 def fitness_func_with_param(set_info: SatInfo):
