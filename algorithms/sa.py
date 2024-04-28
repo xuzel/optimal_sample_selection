@@ -3,8 +3,8 @@ from sko.SA import SA, SACauchy, SABoltzmann
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from data_structure import SatInfo, fitness_func_with_param, Result
-from utils import TEST_SET, hash_function
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function
 from time import perf_counter
 import typing
 
