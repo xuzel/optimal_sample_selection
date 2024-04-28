@@ -38,7 +38,6 @@ def main(iteration, param_version, output_folder):
         run_time = perf_counter() - start_time
         result = {
             'qusetion_num': i,
-            'x0': x0,
             'T_max': T_max,
             'T_min': T_min,
             'L': L,
