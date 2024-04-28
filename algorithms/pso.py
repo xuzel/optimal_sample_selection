@@ -1,18 +1,19 @@
 from sko.PSO import PSO
 import matplotlib.pyplot as plt
 
-from .data_structure import SatInfo, fitness_func_with_param, Result
-from .utils import TEST_SET, hash_function
+from data_structure import SatInfo, fitness_func_with_param, Result
+from utils import TEST_SET, hash_function
 from time import perf_counter
 import typing
 
 
 def run_pso(sample_parm: typing.List[int],
-            pop=1000,
-            max_iter=200,
+            greedy_init=True,
+            pop=1000, #改成2000效果不明显，但是时间会慢
+            max_iter=50,
             w=0.9,
-            c1=2,
-            c2=2):
+            c1=5,
+            c2=5):
     start_time = perf_counter()
     sat_info = SatInfo(*sample_parm)
     n_dim = sat_info.get_input_len()
@@ -27,6 +28,10 @@ def run_pso(sample_parm: typing.List[int],
         c1=c1,
         c2=c2
     )
+    print(pso.X)
+    if greedy_init:
+        pso.X = sat_info.encoder_greedy_solution()
+        print(pso.X)
     solution = pso.run()[0]
     solution = [round(x) for x in solution]
     end_time = perf_counter()
@@ -73,6 +78,6 @@ def main():
 
 if __name__ == '__main__':
     run_pso(
-        [45, 8, 6, 4, 4]
+        [45, 9, 6, 4, 4]
     ).print_result(True)
 
