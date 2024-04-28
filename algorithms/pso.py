@@ -41,6 +41,7 @@ def run_pso(sample_parm: typing.List[int],
     result = Result(
         solution=sat_info.choose_list(solution),
         solution_num=sum(solution),
+        input_parm=sample_parm,
         algorithm='pso',
         encoder_solution=solution,
         valid=sat_info.all_j_subsets_covered(solution),

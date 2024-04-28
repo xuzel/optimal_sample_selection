@@ -77,6 +77,7 @@ def run_aca(sample_parm: typing.List[int],
     end_time = perf_counter()
     result = Result(
         solution=sat_info.choose_list(solution),
+        input_parm=sample_parm,
         solution_num=sum(solution),
         algorithm='aca',
         encoder_solution=solution,
