@@ -57,15 +57,15 @@ class SelectPage(FloatLayout):
             # self.algorithm = 'Greedy'
             pass
         elif self.algorithm == 'GA':
-            self.config.result = run_ga(config)
+            self.config.result = run_ga(config,costume_arr =self.config.n)
         elif self.algorithm == 'SA':
-            self.config.result = run_sa(config)
+            self.config.result = run_sa(config,costume_arr =self.config.n)
         elif self.algorithm == 'PSO':
-            self.config.result = run_pso(config)
+            self.config.result = run_pso(config,costume_arr =self.config.n)
         elif teself.algorithmxt == 'AFSA':
-            self.config.result = run_afsa(config)
+            self.config.result = run_afsa(config, costume_arr=self.config.n)
         elif self.algorithm == 'ACA':
-            self.config.result = run_aca(config)
+            self.config.result = run_aca(config, costume_arr=self.config.n)
 
         return self.config.result
 
