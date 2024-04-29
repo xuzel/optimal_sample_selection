@@ -1,8 +1,8 @@
 from sko.PSO import PSO
 import matplotlib.pyplot as plt
 import numpy as np
-from data_structure import SatInfo, fitness_func_with_param, Result
-from utils import TEST_SET, hash_function, replace_rows_randomly
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function, replace_rows_randomly
 from time import perf_counter
 import typing
 
@@ -14,9 +14,10 @@ def run_pso(sample_parm: typing.List[int],
             max_iter=100,
             w=0.9,
             c1=5,
-            c2=5):
+            c2=5,
+            **kwargs):
     start_time = perf_counter()
-    sat_info = SatInfo(*sample_parm)
+    sat_info = SatInfo(*sample_parm, **kwargs)
     n_dim = sat_info.get_input_len()
     pso = PSO(
         func=fitness_func_with_param(sat_info),
@@ -36,6 +37,8 @@ def run_pso(sample_parm: typing.List[int],
         pso.X = replace_rows_randomly(pso.X, greedy_replace_probability, greedy_solution)
         # print(pso.X)
     solution = pso.run()[0]
+    if type(solution) is np.ndarray:
+        solution = solution.tolist()
     solution = [round(x) for x in solution]
     end_time = perf_counter()
     result = Result(
