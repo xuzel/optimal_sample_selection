@@ -1,8 +1,8 @@
 from copy import deepcopy
 
 import matplotlib.pyplot as plt
-from data_structure import SatInfo, fitness_func_with_param, Result
-from utils import TEST_SET, hash_function
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function
 from time import perf_counter
 import numpy as np
 import typing
@@ -103,9 +103,10 @@ def run_asfa(sample_parm: typing.List[int],
              step=1,
              visual=5,
              q=0.9,
-             delta=0.7):
+             delta=0.7，
+             **kwargs):
     start_time = perf_counter()
-    sat_info = SatInfo(*sample_parm)
+    sat_info = SatInfo(*sample_parm, **kwargs)
     n_dim = sat_info.get_input_len()
     afsa = AFSA(
         func=fitness_func_with_param(sat_info),
@@ -162,6 +163,6 @@ def main():
 
 
 if __name__ == '__main__':
-    run_asfa(
+    run_afsa(
         [45, 12, 6, 6, 4]
     ).print_result(True)

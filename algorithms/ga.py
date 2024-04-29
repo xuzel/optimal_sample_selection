@@ -19,9 +19,10 @@ def run_ga(sample_parm: typing.List[int],
            prob_mut=0.01,
            auto_parm=True,
            greedy_init=True,
-           greedy_replace_probability=0.01):
+           greedy_replace_probability=0.01,
+           **kwargs):
     start_time = perf_counter()
-    sat_info = SatInfo(*sample_parm)
+    sat_info = SatInfo(*sample_parm, **kwargs)
     n_dim = sat_info.get_input_len()
     if auto_parm:
         weight = 15

@@ -3,8 +3,8 @@ from sko.SA import SA, SACauchy, SABoltzmann
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from data_structure import SatInfo, fitness_func_with_param, Result
-from utils import TEST_SET, hash_function
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function
 from time import perf_counter
 import typing
 
@@ -14,9 +14,10 @@ def run_sa(sample_parm: typing.List[int],
            T_max=100,
            T_min=1e-9,
            L=300,
-           max_stay_counter=350):
+           max_stay_counter=350,
+           **kwargs):
     start_time = perf_counter()
-    sat_info = SatInfo(*sample_parm)
+    sat_info = SatInfo(*sample_parm, **kwargs)
     n_dim = sat_info.get_input_len()
     if random_init:
         x0 = np.random.choice([0, 1], size=n_dim)
@@ -31,6 +32,8 @@ def run_sa(sample_parm: typing.List[int],
         max_stay_counter=max_stay_counter
     )
     solution = sa.run()[0]
+    if type(solution) is np.ndarray:
+        solution = solution.tolist()
     solution = [round(x) for x in solution]
     end_time = perf_counter()
     result = Result(
