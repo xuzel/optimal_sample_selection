@@ -14,9 +14,10 @@ def run_sa(sample_parm: typing.List[int],
            T_max=100,
            T_min=1e-9,
            L=300,
-           max_stay_counter=350):
+           max_stay_counter=350,
+           **kwargs):
     start_time = perf_counter()
-    sat_info = SatInfo(*sample_parm)
+    sat_info = SatInfo(*sample_parm, **kwargs)
     n_dim = sat_info.get_input_len()
     if random_init:
         x0 = np.random.choice([0, 1], size=n_dim)

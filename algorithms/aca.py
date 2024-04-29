@@ -60,9 +60,10 @@ def run_aca(sample_parm: typing.List[int],
             max_iter: int = 200,
             alpha: int = 1,
             beta: int = 2,
-            rho: float = 0.1):
+            rho: float = 0.1,
+            **kwargs):
     start_time = perf_counter()
-    sat_info = SatInfo(*sample_parm)
+    sat_info = SatInfo(*sample_parm, **kwargs)
     n_dim = sat_info.get_input_len()
     aca = ACABinary(
         func=fitness_func_with_param(sat_info),

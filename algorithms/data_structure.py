@@ -14,8 +14,12 @@ DEBUG = False
 
 
 class SatInfo:
-    def __init__(self, m: int, n: int, k: int, j: int, s: int):
-        self.n_set = data_order(ascii_uppercase[:n])
+    def __init__(self, m: int, n: int, k: int, j: int, s: int, **kwargs):
+        if 'custom_arr' in kwargs and kwargs['custom_arr']:
+            assert len(kwargs['custom_arr']) == n, f"the len of input arr is {len(kwargs['custom_arr'])}, but we need {n}"
+            self.n_set = kwargs['custom_arr']
+        else:
+            self.n_set = data_order(ascii_uppercase[:n])
         self.all_k_set = data_order(itertools.combinations(self.n_set, k))
         self.all_j_set = data_order(itertools.combinations(self.n_set, j))
         self.all_s_set = [data_order(itertools.combinations(each_j, s)) for each_j in self.all_j_set]
