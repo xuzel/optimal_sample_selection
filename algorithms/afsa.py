@@ -103,9 +103,10 @@ def run_afsa(sample_parm: typing.List[int],
              step=1,
              visual=3,
              q=0.98,
-             delta=0.5):
+             delta=0.5,
+             **kwargs):
     start_time = perf_counter()
-    sat_info = SatInfo(*sample_parm)
+    sat_info = SatInfo(*sample_parm, **kwargs)
     n_dim = sat_info.get_input_len()
     afsa = AFSA(
         func=fitness_func_with_param(sat_info),
