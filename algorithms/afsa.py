@@ -9,7 +9,7 @@ import typing
 
 
 class AFSA:
-    def __init__(self, func, n_dim, size_pop=100, max_iter=1000,
+    def __init__(self, func, n_dim, size_pop=100, max_iter=100,
                  max_try_num=100, step=1, visual=5,
                  q=0.98, delta=0.6):
         self.func = func
@@ -96,14 +96,14 @@ class AFSA:
         return self.best_x, self.best_y
 
 
-def run_afsa(sample_parm: typing.List[int],
-             size_pop=50,
-             max_iter=100,
+def run_asfa(sample_parm: typing.List[int],
+             size_pop=100,
+             max_iter=500,
              max_try_num=100,
              step=1,
-             visual=3,
-             q=0.98,
-             delta=0.5,
+             visual=5,
+             q=0.9,
+             delta=0.7，
              **kwargs):
     start_time = perf_counter()
     sat_info = SatInfo(*sample_parm, **kwargs)
