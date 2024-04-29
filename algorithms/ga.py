@@ -1,7 +1,7 @@
 import numpy as np
 
-from data_structure import SatInfo, fitness_func_with_param, Result
-from utils import TEST_SET, hash_function, replace_rows_randomly
+from .data_structure import SatInfo, fitness_func_with_param, Result
+from .utils import TEST_SET, hash_function, replace_rows_randomly
 
 from sko.GA import GA
 import pandas as pd

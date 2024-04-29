@@ -51,7 +51,7 @@ class SelectPage(FloatLayout):
 
         return self.config.n
 
-    def run_algorithms(self, m, n, k, j, s):
+    def run_algorithms(self, m, n, k, j, s ):
         config = list(map(int, [m, n, k, j, s]))
         if self.algorithm == 'Greedy':
             # self.algorithm = 'Greedy'
@@ -59,15 +59,15 @@ class SelectPage(FloatLayout):
         elif self.algorithm == 'GA':
             self.config.result = run_ga(config)
         elif self.algorithm == 'SA':
-            self.config.result = run_sa(config)
+            self.config.result = run_sa(config, cosum_arr = self.config.n)
         elif self.algorithm == 'PSO':
-            self.config.result = run_pso(config)
-        elif teself.algorithmxt == 'AFSA':
-            self.config.result = run_afsa(config)
+            self.config.result = run_pso(config, cosum_arr = self.config.n)
+        elif self.algorithm == 'AFSA':
+            self.config.result = run_afsa(config, cosum_arr = self.config.n)
         elif self.algorithm == 'ACA':
-            self.config.result = run_aca(config)
+            self.config.result = run_aca(config, cosum_arr = self.config.n)
 
-        return self.config.result
+        return str(self.config.result.solution)
 
     def import_database(self):
         self.dismiss_popup()
