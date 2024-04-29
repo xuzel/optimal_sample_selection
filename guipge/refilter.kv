@@ -1,0 +1,388 @@
+#:kivy 1.11.0
+<RefilterPage>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: r'Optimal-sample-selection\static\art1-resized.jpg'
+
+    BoxLayout:
+        size_hint: (1,0.1)
+        pos_hint: {"center_x": 0.5, "top": 1}
+        Label:
+            text: '[b]An Optimal Sample Selection[/b]'
+            color: 0.9, 0.9, 0.8, 1  # Black color
+            font_size: 40  # Larger font size
+            # pos_hint: {"center_x":0.5,"y":0.45}  # Adjust position for 1000x720 screen
+            markup: True
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (1, 0.1)
+        pos_hint: {"center_x": 0.5, "top": 0.9}
+        spacing: 10
+        padding: 30, 0
+        Spinner:
+            id: spinner
+            text: 'Please choose.'
+            size_hint: (0.5, 1)
+            pos_hint:{"right": 0.5}
+            color: 0.9, 0.9, 0.8, 1
+            background_color: 1, 1, 1, 0.3
+            values: ('Define positions and numbers', 'Define positions and range of numbers', 'Select positions with fixed numbers')
+            on_text: root.update_box(self.text)
+        Label:
+            size_hint:(0.2, 1)
+            text: "Please input 3 positions"
+            color: 0.9, 0.9, 0.8, 1  # Black color
+            background_color: 1, 1, 1, 0.3
+            font_size: 25  # Larger font size
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: (0.3, 1)
+            spacing: 10
+            TextInput:
+                id: n_input
+                font_size: '30sp'  # Increase font size
+                halign: 'left'  # Horizontal alignment
+                valign: 'middle'  # Vertical alignment
+                foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                background_normal: '' 
+                background_color: 1, 1, 1, 0.3
+            TextInput:
+                id: n_input
+                font_size: '30sp'  # Increase font size
+                halign: 'left'  # Horizontal alignment
+                valign: 'middle'  # Vertical alignment
+                foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                background_normal: '' 
+                background_color: 1, 1, 1, 0.3
+            TextInput:
+                id: n_input
+                font_size: '30sp'  # Increase font size
+                halign: 'left'  # Horizontal alignment
+                valign: 'middle'  # Vertical alignment
+                foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                background_normal: '' 
+                background_color: 1, 1, 1, 0.3
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (0.8,0.05)
+        pos_hint: {"x": 0, "top": 0.4}
+        spacing: 30
+        padding: 50, 10
+        Label:
+            text: 'Value Input'
+            color: 0.9, 0.9, 0.8, 1
+        Label:
+            text: 'Results'
+            color: 0.9, 0.9, 0.8, 1
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (0.8,0.35)
+        pos_hint: {"x": 0, "top": 0.35}
+        spacing: 30
+        padding: 50, 10
+        TextInput:
+            id: Value Input
+            font_size: '25sp'  # Increase font size
+            halign: 'left'  # Horizontal alignment
+            multiline: True  # To make valign effective
+            foreground_color: 0.9, 0.9, 0.8, 1 
+            background_normal: '' 
+            background_color: 1, 1, 1, 0.5
+        TextInput:
+            id: Result
+            font_size: '25sp'  # Increase font size
+            halign: 'left'  # Horizontal alignment
+            multiline: True  # To make valign effective
+            foreground_color: 0.9, 0.9, 0.8, 1 
+            background_normal: '' 
+            background_color: 1, 1, 1, 0.5
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: (0.2,0.4)
+        pos_hint: {"right":1,"top":0.4}
+        padding: 50, 10
+        spacing: 30
+        Button:
+            id: excute
+            # size_hint: (0.33333, 1)
+            text: "[b]Excute[/b]"
+            color: 0.9, 0.9, 0.8, 1
+            background_color: 1, 1, 1, 0.3
+            markup: True
+            on_release: pass
+        Button:
+            id: excute
+            # size_hint: (0.33333, 1)
+            text: "[b]Display[/b]"
+            color: 0.9, 0.9, 0.8, 1
+            background_color: 1, 1, 1, 0.3
+            markup: True
+            on_release: pass
+        Button:
+            id: excute
+            # size_hint: (0.33333, 1)
+            text: "[b]Print[/b]"
+            color: 0.9, 0.9, 0.8, 1
+            background_color: 1, 1, 1, 0.3
+            markup: True
+            on_release: pass
+        Button:
+            text: "[b]Previous[/b]"
+            color: 0.9, 0.9, 0.8, 1
+            background_color: 1, 1, 1, 0.3
+            markup: True
+            on_release: root.page_database()
+        Button:
+            text: "[b]Back to Index[/b]"
+            color: 0.9, 0.9, 0.8, 1
+            background_color: 1, 1, 1, 0.3
+            markup: True
+            on_release: root.page_index()
+
+    ScreenManager:
+        id: screen_manager
+
+
+
+    BoxLayout:
+        id: box1
+        opacity: 0
+        orientation: 'vertical'
+        size_hint: (1, 0.4)
+        pos_hint: {"center_x": 0.5, "top": 0.8}
+        padding: 20
+        spacing: 10
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: (1, 0.5)
+            Label:
+                text: 'Please input the corresponding numbers'
+                pos_hint: {'center_x': 0.5,'top': 1}
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                background_color: 1, 1, 1, 0.3
+                font_size: 25
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (1, 0.5)
+                Label:
+                    text: 'First Position:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 25  # Larger font size
+                TextInput:
+                    id: first_position11
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+                Label:
+                    text: 'Second Position:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 25  # Larger font size
+                TextInput:
+                    id: second_position11
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+                Label:
+                    text: 'Third Position:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 25  # Larger font size
+                TextInput:
+                    id: third_position11
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: (1, 0.5)
+            Label:
+                text: 'Please input the corresponding numbers'
+                pos_hint: {'center_x': 0.5,'top': 1}
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                background_color: 1, 1, 1, 0.3
+                font_size: 25
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (1, 0.5)
+                Label:
+                    text: 'First Position:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 25  # Larger font size
+                TextInput:
+                    id: first_position12
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+                Label:
+                    text: 'Second Position:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 25  # Larger font size
+                TextInput:
+                    id: second_position12
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+                Label:
+                    text: 'Third Position:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 25  # Larger font size
+                TextInput:
+                    id: third_position12
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+
+
+    BoxLayout:
+        id: box2
+        opacity: 0
+        orientation: 'vertical'
+        size_hint: (1, 0.4)
+        pos_hint: {"center_x": 0.5, "top": 0.8}
+        padding: 20
+        spacing: 10
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: (1, 0.5)
+            Label:
+                text: 'Please input the range for'
+                pos_hint: {'center_x': 0.5,'top': 1}
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                background_color: 1, 1, 1, 0.3
+                font_size: 25
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (1, 0.5)
+                Label:
+                    text: 'First Position Range:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 23  # Larger font size
+                TextInput:
+                    id: first_position21
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+                Label:
+                    text: 'Second Position Range:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 23  # Larger font size
+                TextInput:
+                    id: second_position21
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+                Label:
+                    text: 'Third Position Range:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 23  # Larger font size
+                TextInput:
+                    id: third_position21
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: (1, 0.5)
+            Label:
+                text: 'Please input the range not to be include for'
+                pos_hint: {'center_x': 0.5,'top': 1}
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                background_color: 1, 1, 1, 0.3
+                font_size: 23
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (1, 0.5)
+                Label:
+                    text: 'First Position Range:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 23  # Larger font size
+                TextInput:
+                    id: first_position22
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+                Label:
+                    text: 'Second Position Range:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 23  # Larger font size
+                TextInput:
+                    id: second_position22
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+                Label:
+                    text: 'Third Position Range:'
+                    color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_color: 1, 1, 1, 0.3
+                    font_size: 23  # Larger font size
+                TextInput:
+                    id: third_position22
+                    halign: 'left'  # Horizontal alignment
+                    valign: 'middle'  # Vertical alignment
+                    foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                    background_normal: '' 
+                    background_color: 1, 1, 1, 0.3
+
+
+    BoxLayout:
+        id: box3
+        opacity: 0
+        orientation: 'horizontal'
+        size_hint: (1, 0.4)
+        pos_hint: {"center_x": 0.5, "top": 0.8}
+        padding: 20
+        spacing: 10
+        Label:
+            text: 'Please enter the sum of this three positions:'
+            color: 0.9, 0.9, 0.8, 1  # Black color
+            background_color: 1, 1, 1, 0.3
+            font_size: 25  # Larger font size
+        TextInput:
+            id: sum_position
+            size_hint: (0.5, 0.25)
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            halign: 'left'  # Horizontal alignment
+            valign: 'middle'  # Vertical alignment
+            foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+            background_normal: '' 
+            background_color: 1, 1, 1, 0.3
