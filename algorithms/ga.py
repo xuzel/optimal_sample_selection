@@ -1,7 +1,7 @@
 import numpy as np
 
-from .data_structure import SatInfo, fitness_func_with_param, Result
-from .utils import TEST_SET, hash_function, replace_rows_randomly
+from data_structure import SatInfo, fitness_func_with_param, Result
+from utils import TEST_SET, hash_function, replace_rows_randomly
 
 from sko.GA import GA
 import pandas as pd
@@ -98,7 +98,7 @@ def main():
 
 if __name__ == '__main__':
     run_ga(
-        [45, 12, 6, 6, 4],
+        [45, 7, 6, 5, 5],
         auto_parm=False,
         max_iter=100
     ).print_result(True)
