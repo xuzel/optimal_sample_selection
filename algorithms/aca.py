@@ -60,9 +60,10 @@ def run_aca(sample_parm: typing.List[int],
             max_iter: int = 200,
             alpha: int = 1,
             beta: int = 2,
-            rho: float = 0.1):
+            rho: float = 0.1,
+            **kwargs):
     start_time = perf_counter()
-    sat_info = SatInfo(*sample_parm)
+    sat_info = SatInfo(*sample_parm, **kwargs)
     n_dim = sat_info.get_input_len()
     aca = ACABinary(
         func=fitness_func_with_param(sat_info),
@@ -76,11 +77,11 @@ def run_aca(sample_parm: typing.List[int],
     solution = aca.run()[0]
     end_time = perf_counter()
     result = Result(
-        solution=sat_info.choose_list(solution),
+        solution=sat_info.choose_list(solution.tolist()),
         input_parm=sample_parm,
         solution_num=sum(solution),
         algorithm='aca',
-        encoder_solution=solution,
+        encoder_solution=solution.tolist(),
         valid=sat_info.all_j_subsets_covered(solution),
         run_time=end_time - start_time,
         y_history=aca.generation_best_Y

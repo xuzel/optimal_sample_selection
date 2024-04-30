@@ -177,15 +177,15 @@
             background_color: 1, 1, 1, 0.3
             markup: True
             on_press: result.text = "Please Waiting!!!"
-            on_press: input.text = root.get_input(random_n.active, input_n.active, m.text, n.text, n_content.text)
-            on_release: result_output.text = root.run_algorithms(m.text, n.text, k.text, j.text, s.text)
+            on_press: input.text = root.run_
+            on_release: result.text = root.run_algorithms(m.text, n.text, k.text, j.text, s.text)
         Button:
             # size_hint: (0.33333, 1)
             text: "[b]Delete[/b]"
             color: 0.9, 0.9, 0.8, 1
             background_color: 1, 1, 1, 0.3
             markup: True
-            on_release: Result.text = root.import_database()
+            on_release: result.text = root.import_database()
 
     BoxLayout:
         orientation: 'vertical'
