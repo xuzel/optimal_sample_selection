@@ -14,8 +14,12 @@ DEBUG = False
 
 
 class SatInfo:
-    def __init__(self, m: int, n: int, k: int, j: int, s: int):
-        self.n_set = data_order(ascii_uppercase[:n])
+    def __init__(self, m: int, n: int, k: int, j: int, s: int, **kwargs):
+        if 'custom_arr' in kwargs and kwargs['custom_arr']:
+            assert len(kwargs['custom_arr']) == n, f"the len of input arr is {len(kwargs['custom_arr'])}, but we need {n}"
+            self.n_set = kwargs['custom_arr']
+        else:
+            self.n_set = data_order(ascii_uppercase[:n])
         self.all_k_set = data_order(itertools.combinations(self.n_set, k))
         self.all_j_set = data_order(itertools.combinations(self.n_set, j))
         self.all_s_set = [data_order(itertools.combinations(each_j, s)) for each_j in self.all_j_set]
@@ -80,7 +84,7 @@ class Result:
                  run_time: float,
                  y_history: typing.Union[typing.List, pd.DataFrame]):
         self.solution = solution
-        self.solution_num = solution_num
+        self.solution_num = int(solution_num)
         self.input_parm = input_parm
         self.algorithm = algorithm
         self.encoder_solution = encoder_solution
@@ -115,9 +119,10 @@ class Result:
                 plt.plot(self.y_history)
             plt.suptitle(self.title, fontsize=12, color='purple', fontweight='bold')
             plt.show()
+        return self
 
     def save_fit_func_pic(self, file_path, file_name):
-        plt.title(self.title)
+        # plt.title(self.title)
         if self.algorithm == 'ga':
             fig, ax = plt.subplots(2, 1)
             ax[0].plot(self.y_history.index, self.y_history.values, '.', color='red')
@@ -132,6 +137,7 @@ class Result:
         if not os.path.exists(file_path):
             os.makedirs(file_path, exist_ok=True)
         plt.savefig(os.path.join(file_path, f"{file_name}-{file_name_format}.jpg"))
+        plt.close()
 
 
 def fitness_func_with_param(set_info: SatInfo):

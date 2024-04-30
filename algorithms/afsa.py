@@ -96,16 +96,17 @@ class AFSA:
         return self.best_x, self.best_y
 
 
-def run_asfa(sample_parm: typing.List[int],
+def run_afsa(sample_parm: typing.List[int],
              size_pop=100,
              max_iter=500,
              max_try_num=100,
              step=1,
              visual=5,
              q=0.9,
-             delta=0.7):
+             delta=0.7,
+             **kwargs):
     start_time = perf_counter()
-    sat_info = SatInfo(*sample_parm)
+    sat_info = SatInfo(*sample_parm, **kwargs)
     n_dim = sat_info.get_input_len()
     afsa = AFSA(
         func=fitness_func_with_param(sat_info),
@@ -162,6 +163,6 @@ def main():
 
 
 if __name__ == '__main__':
-    run_asfa(
+    run_afsa(
         [45, 12, 6, 6, 4]
     ).print_result(True)
