@@ -23,9 +23,9 @@ from algorithms import *
 # result.save_fit_func_pic('./test_result', 'test')
 
 
-result = run_ga(
-    [45, 8, 6, 4, 4], custom_arr=range(0, 8)
-)
+result = run_greedy(
+    [45, 8, 7, 6, 6], custom_arr=range(0, 8)
+).print_result(False)
 print(result.solution)
 output = f"""
 the time is {result.run_time}
