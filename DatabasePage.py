@@ -28,9 +28,9 @@ class DatabasePage(FloatLayout):
         App.get_running_app().screen_manager.current = "Refilter_page"
         App.get_running_app().screen_manager.transition.direction = 'left'
 
-    def search(self,m,n,k,j,s,alg):
-        Database.search(m=m,n=n,k=k,j=j,s=s,alg=alg)
+    # def search(self,m,n,k,j,s,alg):
+    #     Database.search(m=m,n=n,k=k,j=j,s=s,alg=alg)
 
-    def search(self, *args):
-        
-        Database.search(*args)
+    def search(self, param):
+
+        Database.search(**param)
