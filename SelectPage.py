@@ -49,15 +49,23 @@ class SelectPage(FloatLayout):
                 self.popup.open()
             self.config.n = n_content
 
-        return self.config.n
+        return str(self.config.n)
 
-    def run_algorithms(self, m, n, k, j, s ):
+    def run_algorithms(self, m, n, k, j, s):
+        # TODO: 需要改变返回值的格式，使其返回一个元组列表。每个元组应包含：
+        #       - 所选集合的序号
+        #       - 所选集合本身
+        #       - 使用的算法名称
+        #       例如：
+        #       1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'GA'
+        #       2, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'GA'
+        #       ...
         config = list(map(int, [m, n, k, j, s]))
         if self.algorithm == 'Greedy':
             # self.algorithm = 'Greedy'
             pass
         elif self.algorithm == 'GA':
-            self.config.result = run_ga(config,costume_arr =self.config.n)
+            self.config.result = run_ga(config, costume_arr =self.config.n)
         elif self.algorithm == 'SA':
             self.config.result = run_sa(config, cosum_arr = self.config.n)
         elif self.algorithm == 'PSO':
@@ -67,7 +75,7 @@ class SelectPage(FloatLayout):
         elif self.algorithm == 'ACA':
             self.config.result = run_aca(config, cosum_arr = self.config.n)
 
-        return str(self.config.result.solution)
+        return str(sum(self.config.result.solution[0]), SatInfo.choose_list(solution[0]))
 
     def import_database(self):
         self.dismiss_popup()
