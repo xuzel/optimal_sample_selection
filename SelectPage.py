@@ -9,6 +9,7 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 
 from algorithms import *
+from our_atabase import Database
 
 
 class SelectPage(FloatLayout):
@@ -73,7 +74,7 @@ class SelectPage(FloatLayout):
             self.config.result = run_afsa(config, custom_arr = self.config.n)
         elif self.algorithm == 'ACA':
             self.config.result = run_aca(config, custom_arr = self.config.n)
-
+    
         out_put = (f"the algorithm is: {self.config.result.algorithm}\n"
                     f"the num of the solution is: {self.config.result.solution_num}\n"
                     f"the time the algorithm use is: \n{self.config.result.run_time:.4f} seconds\n")
@@ -81,6 +82,9 @@ class SelectPage(FloatLayout):
             out_put += f"{index+1}: {x} \n"
 
         return out_put
+
+    def append_data(self):
+        Database.append_data(self.config.result)
 
     def import_database(self):
         self.dismiss_popup()
