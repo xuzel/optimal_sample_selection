@@ -61,6 +61,7 @@ class SelectPage(FloatLayout):
         #       2, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'GA'
         #       ...
         config = list(map(int, [m, n, k, j, s]))
+        print(self.config.n)
         if self.algorithm == 'Greedy':
             # self.algorithm = 'Greedy'
             pass
@@ -77,7 +78,7 @@ class SelectPage(FloatLayout):
 
         out_put = (f"the time the algorithm use is: {self.config.result.run_time}"
                    f"the num of the solution is: {self.config.result.solution_num}"
-                   f"the algorithm is: {self.config.result.algorithm}")
+                   f"the algorithm is: {self.config.result.algorithm} \n")
         for index, x in enumerate(self.config.result.solution):
             out_put += f"{index}: {x} \n"
 
