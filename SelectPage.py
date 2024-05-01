@@ -63,20 +63,19 @@ class SelectPage(FloatLayout):
         config = list(map(int, [m, n, k, j, s]))
         print(self.config.n)
         if self.algorithm == 'Greedy':
-            # self.algorithm = 'Greedy'
-            pass
+            self.config.result = run_greedy(config, custom_arr =self.config.n)
         elif self.algorithm == 'GA':
-            self.config.result = run_ga(config, costume_arr =self.config.n)
+            self.config.result = run_ga(config, custom_arr =self.config.n)
         elif self.algorithm == 'SA':
-            self.config.result = run_sa(config, cosum_arr = self.config.n)
+            self.config.result = run_sa(config, custom_arr = self.config.n)
         elif self.algorithm == 'PSO':
-            self.config.result = run_pso(config, cosum_arr = self.config.n)
+            self.config.result = run_pso(config, custom_arr = self.config.n)
         elif self.algorithm == 'AFSA':
-            self.config.result = run_afsa(config, cosum_arr = self.config.n)
+            self.config.result = run_afsa(config, custom_arr = self.config.n)
         elif self.algorithm == 'ACA':
-            self.config.result = run_aca(config, cosum_arr = self.config.n)
+            self.config.result = run_aca(config, custom_arr = self.config.n)
 
-        out_put = (f"the time the algorithm use is: {self.config.result.run_time}"
+        out_put = (f"the time the algorithm use is: {self.config.result.run_time:.4f}"
                    f"the num of the solution is: {self.config.result.solution_num}"
                    f"the algorithm is: {self.config.result.algorithm} \n")
         for index, x in enumerate(self.config.result.solution):
