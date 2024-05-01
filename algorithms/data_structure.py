@@ -117,6 +117,8 @@ class Result:
                 self.y_history.min(axis=1).cummin().plot(kind='line')
             elif self.algorithm == 'sa':
                 plt.plot(pd.DataFrame(self.y_history).cummin(axis=0))
+            elif self.algorithm == 'greedy':
+                return self
             else:
                 plt.plot(self.y_history)
             plt.suptitle(self.title, fontsize=12, color='purple', fontweight='bold')
@@ -131,6 +133,8 @@ class Result:
             self.y_history.min(axis=1).cummin().plot(kind='line')
         elif self.algorithm == 'sa':
             plt.plot(pd.DataFrame(self.y_history).cummin(axis=0))
+        elif self.algorithm == 'greedy':
+            return self
         else:
             plt.plot(self.y_history)
         plt.suptitle(self.title, fontsize=12, color='purple', fontweight='bold')
@@ -140,6 +144,7 @@ class Result:
             os.makedirs(file_path, exist_ok=True)
         plt.savefig(os.path.join(file_path, f"{file_name}-{file_name_format}.jpg"))
         plt.close()
+        return self
 
 
 def fitness_func_with_param(set_info: SatInfo):
