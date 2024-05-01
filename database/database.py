@@ -10,7 +10,7 @@ class Database:
     def __init__(self, root_path: str = './'):
         os.makedirs(root_path, exist_ok=True)
         self.database_path = os.path.join(root_path, 'database.json')
-        mode = 'w+' if not os.path.exists(self.database_path) else 'r+'
+        mode = 'r+' if not os.path.exists(self.database_path) else 'r+'
         self.database = open(self.database_path, mode)
         try:
             self.data = json.load(self.database)
