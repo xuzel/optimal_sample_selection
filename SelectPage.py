@@ -61,7 +61,6 @@ class SelectPage(FloatLayout):
         #       2, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'GA'
         #       ...
         config = list(map(int, [m, n, k, j, s]))
-        print(self.config.n)
         if self.algorithm == 'Greedy':
             self.config.result = run_greedy(config, custom_arr =self.config.n)
         elif self.algorithm == 'GA':
@@ -75,11 +74,11 @@ class SelectPage(FloatLayout):
         elif self.algorithm == 'ACA':
             self.config.result = run_aca(config, custom_arr = self.config.n)
 
-        out_put = (f"the time the algorithm use is: {self.config.result.run_time:.4f}"
-                   f"the num of the solution is: {self.config.result.solution_num}"
-                   f"the algorithm is: {self.config.result.algorithm} \n")
+        out_put = (f"the algorithm is: {self.config.result.algorithm}\n"
+                    f"the num of the solution is: {self.config.result.solution_num}\n"
+                    f"the time the algorithm use is: \n{self.config.result.run_time:.4f} seconds\n")
         for index, x in enumerate(self.config.result.solution):
-            out_put += f"{index}: {x} \n"
+            out_put += f"{index+1}: {x} \n"
 
         return out_put
 

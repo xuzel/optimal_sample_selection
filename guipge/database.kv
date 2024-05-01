@@ -139,19 +139,19 @@
             Button:
                 text: "[b]Display[/b]"
                 color: 0.9, 0.9, 0.8, 1
-                background_color: 1, 1, 1, 0.3
+                background_color: 0.4, 0.5, 0.6, 0.5
                 markup: True
                 on_release: text_input.text = root.query_specified_data(m_input.text,n_input.text,k_input.text,j_input.text,s_input.text,algrothim.text)
             Button:
                 text: "[b]Delete[/b]"
                 color: 0.9, 0.9, 0.8, 1
-                background_color: 1, 1, 1, 0.3
+                background_color: 0.4, 0.5, 0.6, 0.5
                 markup: True
                 on_release: text_input.text = root.delete_specified_data(m_input.text,n_input.text,k_input.text,j_input.text,s_input.text,algrothim.text)
             Button:
                 text: "[b]Download DB[/b]"
                 color: 0.9, 0.9, 0.8, 1
-                background_color: 1, 1, 1, 0.3
+                background_color: 0.4, 0.5, 0.6, 0.5
                 markup: True
                 on_release: root.show_load()
 
@@ -186,18 +186,18 @@
         Button:
             text: "[b]Previous[/b]"
             color: 0.9, 0.9, 0.8, 1
-            background_color: 1, 1, 1, 0.3
+            background_color: 0.4, 0.5, 0.6, 0.5
             markup: True
             on_release: root.page_select()
         Button:
             text: "[b]Re-Filter[/b]"
             color: 0.9, 0.9, 0.8, 1
-            background_color: 1, 1, 1, 0.3
+            background_color: 0.4, 0.5, 0.6, 0.5
             markup: True
             on_release: root.page_refilter()
         Button:
             text: "[b]Back to Index[/b]"
             color: 0.9, 0.9, 0.8, 1
-            background_color: 1, 1, 1, 0.3
+            background_color: 0.4, 0.5, 0.6, 0.5
             markup: True
             on_release: root.page_index()
