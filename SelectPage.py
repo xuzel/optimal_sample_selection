@@ -75,7 +75,13 @@ class SelectPage(FloatLayout):
         elif self.algorithm == 'ACA':
             self.config.result = run_aca(config, cosum_arr = self.config.n)
 
-        return str(sum(self.config.result.solution[0]), SatInfo.choose_list(solution[0]))
+        out_put = (f"the time the algorithm use is: {self.config.result.run_time}"
+                   f"the num of the solution is: {self.config.result.solution_num}"
+                   f"the algorithm is: {self.config.result.algorithm}")
+        for index, x in enumerate(self.config.result.solution):
+            out_put += f"{index}: {x} \n"
+
+        return out_put
 
     def import_database(self):
         self.dismiss_popup()
