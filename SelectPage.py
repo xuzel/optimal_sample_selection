@@ -49,25 +49,39 @@ class SelectPage(FloatLayout):
                 self.popup.open()
             self.config.n = n_content
 
-        return self.config.n
+        return str(self.config.n)
 
     def run_algorithms(self, m, n, k, j, s):
+        # TODO: 需要改变返回值的格式，使其返回一个元组列表。每个元组应包含：
+        #       - 所选集合的序号
+        #       - 所选集合本身
+        #       - 使用的算法名称
+        #       例如：
+        #       1, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'GA'
+        #       2, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'GA'
+        #       ...
         config = list(map(int, [m, n, k, j, s]))
+        print(self.config.n)
         if self.algorithm == 'Greedy':
-            # self.algorithm = 'Greedy'
-            pass
+            self.config.result = run_greedy(config, custom_arr =self.config.n)
         elif self.algorithm == 'GA':
-            self.config.result = run_ga(config)
+            self.config.result = run_ga(config, custom_arr =self.config.n)
         elif self.algorithm == 'SA':
-            self.config.result = run_sa(config)
+            self.config.result = run_sa(config, custom_arr = self.config.n)
         elif self.algorithm == 'PSO':
-            self.config.result = run_pso(config)
-        elif teself.algorithmxt == 'AFSA':
-            self.config.result = run_afsa(config)
+            self.config.result = run_pso(config, custom_arr = self.config.n)
+        elif self.algorithm == 'AFSA':
+            self.config.result = run_afsa(config, custom_arr = self.config.n)
         elif self.algorithm == 'ACA':
-            self.config.result = run_aca(config)
+            self.config.result = run_aca(config, custom_arr = self.config.n)
 
-        return self.config.result
+        out_put = (f"the time the algorithm use is: {self.config.result.run_time:.4f}"
+                   f"the num of the solution is: {self.config.result.solution_num}"
+                   f"the algorithm is: {self.config.result.algorithm} \n")
+        for index, x in enumerate(self.config.result.solution):
+            out_put += f"{index}: {x} \n"
+
+        return out_put
 
     def import_database(self):
         self.dismiss_popup()
