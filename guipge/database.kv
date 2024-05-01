@@ -4,7 +4,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: r'D:\文档\人工智能\example\optimal_sample_selection\static\art1.png'
+            source: r'static\art1-resized.jpg'
 
     BoxLayout:
         size_hint: (1,0.1)
@@ -30,7 +30,6 @@
                 size_hint: (0.5,1)
             TextInput:
                 id: m_input
-                text: ""
                 font_size: '25sp'  # Increase font size
                 halign: 'left'  # Horizontal alignment
                 valign: 'middle'  # Vertical alignment
@@ -47,7 +46,6 @@
                 size_hint: (0.5,1)
             TextInput:
                 id: n_input
-                text: ""
                 font_size: '25sp'  # Increase font size
                 halign: 'left'  # Horizontal alignment
                 valign: 'middle'  # Vertical alignment
@@ -64,7 +62,6 @@
                 font_size: 40  # Larger font size
             TextInput:
                 id: k_input
-                text: ""
                 font_size: '25sp'  # Increase font size
                 halign: 'left'  # Horizontal alignment
                 valign: 'middle'  # Vertical alignment
@@ -86,7 +83,6 @@
                 size_hint: (0.5,1)
             TextInput:
                 id: j_input
-                text: ""
                 font_size: '25sp'  # Increase font size
                 halign: 'left'  # Horizontal alignment
                 valign: 'middle'  # Vertical alignment
@@ -103,7 +99,6 @@
                 size_hint: (0.5,1)
             TextInput:
                 id: s_input
-                text: ""
                 font_size: '25sp'  # Increase font size
                 halign: 'left'  # Horizontal alignment
                 valign: 'middle'  # Vertical alignment
@@ -120,7 +115,6 @@
                 font_size: 40  # Larger font size
             TextInput:
                 id: algrothim
-                text: ""
                 size_hint: (0.25,1)
                 font_size: '25sp'  # Increase font size
                 halign: 'left'  # Horizontal alignment
@@ -154,6 +148,7 @@
                 background_color: 0.4, 0.5, 0.6, 0.5
                 markup: True
                 on_release: value.text = "Successfully delete the data!"
+                # on_release: value.text = str({'m':m_input.text,'n':n_input.text,'k':k_input.text,'j':j_input.text,'s':s_input.text,'alg':algrothim.text})
             Button:
                 text: "[b]Download DB[/b]"
                 color: 0.9, 0.9, 0.8, 1
