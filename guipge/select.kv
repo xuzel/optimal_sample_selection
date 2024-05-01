@@ -166,7 +166,7 @@
             # size_hint: (0.33333, 1)
             text: "[b]Store Database[/b]"
             color: 0.9, 0.9, 0.8, 1
-            background_color: 1, 1, 1, 0.3
+            background_color: 0.4, 0.5, 0.6, 0.5
             markup: True
             on_release: pass
 
@@ -176,7 +176,7 @@
             # size_hint: (0.33333, 1)
             text: "[b]Excute[/b]"
             color: 0.9, 0.9, 0.8, 1
-            background_color: 1, 1, 1, 0.3
+            background_color: 0.4, 0.5, 0.6, 0.5
             markup: True
             on_press: result.text = "Please Waiting!!!"
             on_press: input.text = root.get_input(random_n.active, input_n.active, m.text, n.text, n_content.text)
@@ -185,7 +185,7 @@
             # size_hint: (0.33333, 1)
             text: "[b]Delete[/b]"
             color: 0.9, 0.9, 0.8, 1
-            background_color: 1, 1, 1, 0.3
+            background_color: 0.4, 0.5, 0.6, 0.5
             markup: True
             on_release: input.text = ''
             on_release: result.text = ''
@@ -199,16 +199,15 @@
         Button:
             text: "[b]Print[/b]"
             color: 0.9, 0.9, 0.8, 1
-            background_color: 1, 1, 1, 0.3
+            background_color: 0.4, 0.5, 0.6, 0.5
             markup: True
             on_release: pass
         Button:
             text: "[b]Next[/b]"
             color: 0.9, 0.9, 0.8, 1
-            background_color: 1, 1, 1, 0.3
+            background_color: 0.4, 0.5, 0.6, 0.5
             markup: True
             on_release: root.page_database()
-
     BoxLayout:
         orientation: 'horizontal'
         size_hint: (0.9,0.05)
@@ -227,8 +226,8 @@
         size_hint: (0.2, 0.05)
         pos_hint:{"x": 0, 'top': 0.6}
         color: 0.9, 0.9, 0.8, 1
-        background_color: 1, 1, 1, 0.3
-        values: ('GA','SA''PSO','AFSA','ACA')
+        background_color: 0.4, 0.5, 0.6, 0.5
+        values: ('GA','Greedy','SA','PSO','AFSA','ACA')
         on_text: root.choose_algorithm(self.text)
 
     BoxLayout:
