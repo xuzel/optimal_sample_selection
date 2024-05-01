@@ -1,4 +1,6 @@
 import math
+from time import perf_counter
+
 import numpy
 import itertools
 import typing
@@ -154,3 +156,21 @@ def fitness_func_with_param(set_info: SatInfo):
             return math.inf
 
     return fitness_func
+
+
+def run_greedy(sample_parm: typing.List[int], **kwargs):
+    start_time = perf_counter()
+    sat_info = SatInfo(*sample_parm, **kwargs)
+    solution = sat_info.greedy_set_cover()
+    end_time = perf_counter()
+    result = Result(
+        solution=solution,
+        solution_num=len(solution),
+        input_parm=sample_parm,
+        algorithm='greedy',
+        encoder_solution=sat_info.encoder_list(solution),
+        valid=True,
+        run_time=end_time - start_time,
+        y_history=[]
+    )
+    return result

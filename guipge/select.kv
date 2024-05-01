@@ -4,7 +4,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: r'Optimal-sample-selection\static\art1-resized.jpg'
+            source: r'D:\文档\人工智能\example\optimal_sample_selection\static\art1.png'
 
     BoxLayout:
         size_hint: (1,0.1)
@@ -169,6 +169,8 @@
             background_color: 1, 1, 1, 0.3
             markup: True
             on_release: pass
+
+#执行算法————————————————————————
         Button:
             id: excute
             # size_hint: (0.33333, 1)
@@ -178,14 +180,16 @@
             markup: True
             on_press: result.text = "Please Waiting!!!"
             on_press: input.text = root.get_input(random_n.active, input_n.active, m.text, n.text, n_content.text)
-            on_release: result_output.text = root.run_algorithms(m.text, n.text, k.text, j.text, s.text)
+            on_release: result.text = root.run_algorithms(m.text, n.text, k.text, j.text, s.text)
         Button:
             # size_hint: (0.33333, 1)
             text: "[b]Delete[/b]"
             color: 0.9, 0.9, 0.8, 1
             background_color: 1, 1, 1, 0.3
             markup: True
-            on_release: Result.text = root.import_database()
+            on_release: input.text = ''
+            on_release: result.text = ''
+            on_release: n_content.text = ''
 
     BoxLayout:
         orientation: 'vertical'
