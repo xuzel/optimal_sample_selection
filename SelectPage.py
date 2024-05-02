@@ -77,7 +77,8 @@ class SelectPage(FloatLayout):
     
         out_put = (f"the algorithm is: {self.config.result.algorithm}\n"
                     f"the num of the solution is: {self.config.result.solution_num}\n"
-                    f"the time the algorithm use is: \n{self.config.result.run_time:.4f} seconds\n")
+                    f"the time the algorithm use is: \n{self.config.result.run_time:.4f} seconds\n"
+                    f"Tisting the sulotion is :{self.config.result.valid} \n")
         for index, x in enumerate(self.config.result.solution):
             out_put += f"{index+1}: {x} \n"
 
