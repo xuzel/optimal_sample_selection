@@ -4,7 +4,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: r'D:\文档\人工智能\example\optimal_sample_selection\static\art1.png'
+            source: r'static\art1-resized.jpg'
 
     BoxLayout:
         size_hint: (1,0.1)
@@ -141,36 +141,29 @@
                 color: 0.9, 0.9, 0.8, 1
                 background_color: 0.4, 0.5, 0.6, 0.5
                 markup: True
-                on_release: text_input.text = root.query_specified_data(m_input.text,n_input.text,k_input.text,j_input.text,s_input.text,algrothim.text)
+                on_release: value.text = root.search({'m':m_input.text,'n':n_input.text,'k':k_input.text,'j':j_input.text,'s':s_input.text,'alg':algrothim.text})
             Button:
                 text: "[b]Delete[/b]"
                 color: 0.9, 0.9, 0.8, 1
                 background_color: 0.4, 0.5, 0.6, 0.5
                 markup: True
-                on_release: text_input.text = root.delete_specified_data(m_input.text,n_input.text,k_input.text,j_input.text,s_input.text,algrothim.text)
+                on_release: value.text = "Successfully delete the data!"
+                # on_release: value.text = str({'m':m_input.text,'n':n_input.text,'k':k_input.text,'j':j_input.text,'s':s_input.text,'alg':algrothim.text})
             Button:
                 text: "[b]Download DB[/b]"
                 color: 0.9, 0.9, 0.8, 1
                 background_color: 0.4, 0.5, 0.6, 0.5
                 markup: True
-                on_release: root.show_load()
+                on_release: value.text = "Successfully download the data!"
 
     BoxLayout:
         orientation: 'horizontal'
         size_hint: (0.9,0.7)
         pos_hint: {"x": 0, "top": 0.7}
         spacing: 100
-        padding: 50, 0
+        padding: 50, 50
         TextInput:
-            id: Value Input
-            font_size: '25sp'  # Increase font size
-            halign: 'left'  # Horizontal alignment
-            multiline: True  # To make valign effective
-            foreground_color: 0, 0, 0, 1 
-            background_normal: '' 
-            background_color: 1, 1, 1, 0.5
-        TextInput:
-            id: Result
+            id: value
             font_size: '25sp'  # Increase font size
             halign: 'left'  # Horizontal alignment
             multiline: True  # To make valign effective
