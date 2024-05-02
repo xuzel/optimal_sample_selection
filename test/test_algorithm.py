@@ -5,7 +5,8 @@ import typing
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 from algorithms import *
 
@@ -43,7 +44,9 @@ def test(test_set: typing.List[typing.Dict], iter_num: int, save_file_path: str)
         'pso': list()
     }
     # algorithm = [run_ga, run_aca, run_afsa, run_sa, run_pso]
-    algorithm = [run_sa]
+
+    algorithm = [run_ga]
+
     # algorithm = [run_aca, run_afsa]
     for i in range(iter_num):
         for each_data in test_set:
@@ -70,11 +73,3 @@ if __name__ == '__main__':
     json_output = json.dumps(out_put, indent=4)
     with open('result.json', 'w') as file:
         file.write(json_output)
-
-
-
-
-
-
-
-

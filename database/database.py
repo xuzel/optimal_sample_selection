@@ -1,61 +1,73 @@
-import pymongo
+import typing
+
+from algorithms import Result
+from pathlib import Path
+import json
+import os
 
 
 class Database:
-    def __init__(self):
-        self.myclient = pymongo.MongoClient("Your Serever")
-        self.mydb = self.myclient["OSS"]
-        self.mycol = self.mydb["data"]
-
-    def insert_one(self, input, output):
+    def __init__(self, root_path: str = './'):
+        os.makedirs(root_path, exist_ok=True)
+        self.database_path = os.path.join(root_path, 'database.json')
+        mode = 'r'  # if not os.path.exists(self.database_path) else 'r+'
+        self.database = open(self.database_path, mode)
         try:
-            input_data = {"input": input}
-            count = self.mycol.count_documents(input_data)
-            input_data["count"] = count + 1
-            input_data["output"] = output
-            self.mycol.insert_one(input_data)
-            return "The data has been inserted into the database successfully."
-        except:
-            return "Insert failed."
+            self.data = json.load(self.database)
+        except json.JSONDecodeError:
+            self.data = {}
 
-    def find_all(self):
-        data_set = []
-        try:
-            for data in self.mycol.find():
-                # print(data)
-                data_set.append([data["input"] + "-" + str(data["count"]), data["output"]])
-            return data_set
-        except:
-            return "Query failed."
+    def search(self, **kwargs) -> typing.Dict:
+        filtered_dict = {k: v for k, v in kwargs.items() if v}
+        matching_dict = dict()
+        for key, value in self.data.items():
+            parts = key.split('-')
+            match = True
+            for part, expected_value in filtered_dict.items():
+                expected_value = str(expected_value)
+                if part in ['m', 'n', 'k', 'j', 's', 'alg', 'i']:  # 确保part合法
+                    index = ['m', 'n', 'k', 'j', 's', 'alg', 'i'].index(part)
+                    if parts[index] != expected_value:
+                        match = False
+                        break
+            if match:
+                matching_dict[key] = value
+        print(matching_dict)
+        return matching_dict
 
-    def find_one(self, input):
-        data = self.mycol.find_one({"input": input})
-        return {data["input"], data["output"]}
+    def append_data(self, new_data: Result):
+        have_value = self.search(
+            m=new_data.input_parm[0],
+            n=new_data.input_parm[1],
+            k=new_data.input_parm[2],
+            j=new_data.input_parm[3],
+            s=new_data.input_parm[4],
+            alg=new_data.algorithm,
+        )
+        for key in have_value.keys():
+            self.data.pop(key)
+        for index, (key, value) in enumerate(have_value.items()):
+            self.data[f"{key[: -2]}{index}"] = value
+        self.data[
+            f"{new_data.input_parm[0]}-{new_data.input_parm[1]}-{new_data.input_parm[2]}-{new_data.input_parm[3]}-{new_data.input_parm[4]}-{new_data.algorithm}-{len(have_value)}"] = {
+            'solution': new_data.solution,
+            'num_solution': new_data.solution_num,
+            'time': new_data.run_time,
+        }
+        json_output = json.dumps(self.data, indent=4)
+        with open(self.database_path, 'w') as file:
+            file.write(json_output)
 
-    def find_many(self, input):
-        data_set = []
-
-        for data in self.mycol.find({"input": input}):
-            data_set.append([data["input"] + "-" + str(data["count"]), data["output"]])
-        return data_set
-
-    def delete_one(self, input, times):
-        try:
-            self.mycol.delete_one({"input": input, "count": times})
-            return "Delete successfully."
-        except:
-            return "Delete failed."
-    def delete_many(self, input):
-        try:
-            self.mycol.delete_many({"input": input})
-            return "Delete successfully."
-        except:
-            return "Delete failed."
+    def delete_data(self, **kwargs):
+        pass
 
 
 if __name__ == '__main__':
-    database = Database()
-    # print(database.insert_one("45-10-6-6-4", "(3, 4, 7, 19, 40, 45), (3, 19, 20, 21, 41, 43), (3, 4, 7, 20, 40, 43)"))
-    # print(database.delete_one("45-10-6-6-4",1))
-    # print(database.find_many("45-10-6-6-4"))
-    print(database.find_one("45-16-6-5-4"))
+    database = Database('./')
+    database.data = {
+        "1-2-3-4-5-algo1-1": "Value1",
+        "1-3-3-4-6-algo2-2": "Value2",
+        "1-2-3-4-0-algo1-3": "Value3",
+        "2-2-3-4-5-algo1-4": "Value4"
+    }
+    print(database.search(m=1))
