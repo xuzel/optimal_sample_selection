@@ -15,7 +15,7 @@ from copy import deepcopy
 
 def run_ga(sample_parm: typing.List[int],
            size_pop: int = 50,
-           max_iter: int = 50,
+           max_iter: int = 100,
            prob_mut=0.01,
            auto_parm=True,
            greedy_init=True,

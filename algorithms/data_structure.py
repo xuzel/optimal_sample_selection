@@ -1,6 +1,6 @@
 import math
 from time import perf_counter
-
+import time
 import numpy
 import itertools
 import typing
@@ -73,6 +73,8 @@ class SatInfo:
 
     def encoder_greedy_solution(self):
         return self.encoder_list(self.greedy_set_cover())
+
+
 
 
 class Result:
