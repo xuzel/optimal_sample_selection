@@ -4,7 +4,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen, ScreenManager
-import sys
+import os, sys
+from kivy.resources import resource_add_path, resource_find
 
 from Config import Config
 from DatabasePage import DatabasePage
@@ -49,4 +50,6 @@ class Oss(App):
 if __name__ == "__main__":
     sys.setrecursionlimit(3000)
     config = Config()
+    if hasattr(sys, '_MEIPASS'):
+        resource_add_path(os.path.join(sys._MEIPASS))
     Oss(config).run()
