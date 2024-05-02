@@ -1,0 +1,281 @@
+{
+    "ga": [],
+    "aca": [
+        {
+            "iter": 0,
+            "run_time": 1.2655800872016698,
+            "alg_solution_num": 6,
+            "parm": [
+                45,
+                7,
+                6,
+                5,
+                5
+            ],
+            "solution_num": 6
+        },
+        {
+            "iter": 0,
+            "run_time": 5.036448744125664,
+            "alg_solution_num": 7,
+            "parm": [
+                45,
+                8,
+                6,
+                4,
+                4
+            ],
+            "solution_num": 8
+        },
+        {
+            "iter": 0,
+            "run_time": 14.276445938972756,
+            "alg_solution_num": 18,
+            "parm": [
+                45,
+                9,
+                6,
+                4,
+                4
+            ],
+            "solution_num": 12
+        },
+        {
+            "iter": 0,
+            "run_time": 4.861453532008454,
+            "alg_solution_num": 4,
+            "parm": [
+                45,
+                8,
+                6,
+                6,
+                5
+            ],
+            "solution_num": 4
+        },
+        {
+            "iter": 0,
+            "run_time": 41.44999906909652,
+            "alg_solution_num": 5,
+            "parm": [
+                45,
+                10,
+                6,
+                6,
+                4
+            ],
+            "solution_num": 4
+        },
+        {
+            "iter": 0,
+            "run_time": 226.59243414597586,
+            "alg_solution_num": 94,
+            "parm": [
+                45,
+                12,
+                6,
+                6,
+                4
+            ],
+            "solution_num": 8
+        },
+        {
+            "iter": 0,
+            "run_time": 35.93892062315717,
+            "alg_solution_num": 83,
+            "parm": [
+                45,
+                10,
+                6,
+                5,
+                5
+            ],
+            "solution_num": 50
+        },
+        {
+            "iter": 0,
+            "run_time": 158.20869465498254,
+            "alg_solution_num": 336,
+            "parm": [
+                45,
+                12,
+                6,
+                5,
+                5
+            ],
+            "solution_num": 132
+        },
+        {
+            "iter": 0,
+            "run_time": 299.67593539413065,
+            "alg_solution_num": 709,
+            "parm": [
+                45,
+                13,
+                6,
+                5,
+                5
+            ],
+            "solution_num": 245
+        },
+        {
+            "iter": 0,
+            "run_time": 37.85053109191358,
+            "alg_solution_num": 28,
+            "parm": [
+                45,
+                10,
+                6,
+                4,
+                4
+            ],
+            "solution_num": 37
+        },
+        {
+            "iter": 0,
+            "run_time": 159.18534872191958,
+            "alg_solution_num": 117,
+            "parm": [
+                45,
+                12,
+                6,
+                4,
+                4
+            ],
+            "solution_num": 42
+        },
+        {
+            "iter": 0,
+            "run_time": 1398.9170607919805,
+            "alg_solution_num": 2845,
+            "parm": [
+                45,
+                16,
+                6,
+                4,
+                4
+            ],
+            "solution_num": 162
+        },
+        {
+            "iter": 0,
+            "run_time": 82.7587487900164,
+            "alg_solution_num": 41,
+            "parm": [
+                45,
+                11,
+                6,
+                6,
+                5
+            ],
+            "solution_num": 26
+        },
+        {
+            "iter": 0,
+            "run_time": 167.2487206889782,
+            "alg_solution_num": 106,
+            "parm": [
+                45,
+                12,
+                6,
+                6,
+                5
+            ],
+            "solution_num": 42
+        },
+        {
+            "iter": 0,
+            "run_time": 1655.203187626088,
+            "alg_solution_num": 2913,
+            "parm": [
+                45,
+                16,
+                6,
+                6,
+                5
+            ],
+            "solution_num": 280
+        },
+        {
+            "iter": 0,
+            "run_time": 176.06623708293773,
+            "alg_solution_num": 102,
+            "parm": [
+                45,
+                12,
+                6,
+                5,
+                4
+            ],
+            "solution_num": 18
+        },
+        {
+            "iter": 0,
+            "run_time": 330.25973123894073,
+            "alg_solution_num": 329,
+            "parm": [
+                45,
+                13,
+                6,
+                5,
+                4
+            ],
+            "solution_num": 28
+        },
+        {
+            "iter": 0,
+            "run_time": 1765.3935895869508,
+            "alg_solution_num": 2899,
+            "parm": [
+                45,
+                16,
+                6,
+                5,
+                4
+            ],
+            "solution_num": 65
+        },
+        {
+            "iter": 0,
+            "run_time": 220.2729863480199,
+            "alg_solution_num": 95,
+            "parm": [
+                45,
+                12,
+                6,
+                6,
+                4
+            ],
+            "solution_num": 6
+        },
+        {
+            "iter": 0,
+            "run_time": 457.2086438690312,
+            "alg_solution_num": 320,
+            "parm": [
+                45,
+                13,
+                6,
+                6,
+                4
+            ],
+            "solution_num": 12
+        },
+        {
+            "iter": 0,
+            "run_time": 3452.2572083419655,
+            "alg_solution_num": 2894,
+            "parm": [
+                45,
+                16,
+                6,
+                6,
+                4
+            ],
+            "solution_num": 38
+        }
+    ],
+    "afsa": [],
+    "sa": [],
+    "pso": []
+}
