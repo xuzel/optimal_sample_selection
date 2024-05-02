@@ -38,8 +38,12 @@ def run_pso(sample_parm: typing.List[int],
         # print(pso.X)
     solution = pso.run()[0]
     if type(solution) is np.ndarray:
-        solution = solution.tolist()
-    solution = [round(x) for x in solution]
+        if solution.ndim > 1:
+            solution = [[round(x) for x in sublist] for sublist in solution]
+        else:
+            solution = [round(x) for x in solution]
+    else:
+        solution = [round(x) for x in solution]
     end_time = perf_counter()
     result = Result(
         solution=sat_info.choose_list(solution),
@@ -72,7 +76,8 @@ def main():
     solution = pso.run()
     end_time = perf_counter()
     print(solution[0])
-    solution = [round(x) for x in solution[0]]
+    # solution = [round(x) for x in solution[0]]
+    solution = [[round(x) for x in sublist] for sublist in solution]
     # print(solution)
     print(f'the solution is:\n{sat_info.choose_list(solution)}\n{solution}\n')
     print(f'the number of the solution is {sum(solution)}')

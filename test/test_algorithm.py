@@ -43,7 +43,7 @@ def test(test_set: typing.List[typing.Dict], iter_num: int, save_file_path: str)
         'pso': list()
     }
     # algorithm = [run_ga, run_aca, run_afsa, run_sa, run_pso]
-    algorithm = [run_ga]
+    algorithm = [run_pso]
     # algorithm = [run_aca, run_afsa]
     for i in range(iter_num):
         for each_data in test_set:
