@@ -4,6 +4,8 @@ import typing
 
 from algorithms import *
 
+
+alg = []
 test_sat = [
     {'parm': [45, 7, 6, 5, 5], 'solution': 6},
     {'parm': [45, 8, 6, 4, 4], 'solution': 8},
@@ -35,10 +37,11 @@ def test(test_set: typing.List[typing.Dict], iter_num: int, save_file_path: str)
         'aca': list(),
         'afsa': list(),
         'sa': list(),
-        'pso': list()
+        'pso': list(),
+        'greedy': list()
     }
-    algorithm = [run_ga, run_aca, run_afsa, run_sa, run_pso]
-    # algorithm = [run_aca, run_afsa]
+    # algorithm = [run_sa]
+    algorithm = [run_afsa]
     for i in range(iter_num):
         for each_data in test_set:
             for each_alg in algorithm:
@@ -60,9 +63,9 @@ def test(test_set: typing.List[typing.Dict], iter_num: int, save_file_path: str)
 
 
 if __name__ == '__main__':
-    out_put = test(test_sat, 5, './test/result')
+    out_put = test(test_sat, 1, './test/result')
     json_output = json.dumps(out_put, indent=4)
-    with open('result.json', 'w') as file:
+    with open('afsa_result.json', 'w') as file:
         file.write(json_output)
 
 
