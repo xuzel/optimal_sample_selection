@@ -35,21 +35,22 @@ class SelectPage(FloatLayout):
     def get_input(self, random_n, input_n, m, n, n_content):
         n_content = n_content.split(",")
         if random_n:
-            potential_letter = list(x for x in range(1, int(m)))
+            potential_letter = list(range(1, int(m)))
             self.config.n = random.sample(potential_letter, int(n))
+            return str(self.config.n)
         elif input_n:
             if not n_content or len(n_content) < int(n):
-                box = BoxLayout(orientation='vertical')  # 创建一个BoxLayout来包含Label和Button
+                box = BoxLayout(orientation='vertical')
                 box.add_widget(Label(text='Please enter the correct value for n!'))
-                button = Button(text='OK',size_hint=(0.25, 0.25),pos_hint={'center_x':0.5})  # 创建一个Button
-                button.bind(on_release=lambda _: self.popup.dismiss())  # 当按钮被点击时，关闭Popup
+                button = Button(text='OK', size_hint=(0.25, 0.25), pos_hint={'center_x': 0.5})
+                button.bind(on_release=lambda _: self.popup.dismiss())
                 box.add_widget(button)
                 self.popup = Popup(title='Input Required',
-                    content=box,  # 使用包含Label和Button的BoxLayout作为Popup的内容
-                    size_hint=(None, None), size=(500, 360))
+                                content=box,
+                                size_hint=(None, None), size=(500, 360))
                 self.popup.open()
+                return None  # 明确表示输入不正确
             self.config.n = n_content
-
         return str(self.config.n)
 
     def run_algorithms(self, m, n, k, j, s):
@@ -74,6 +75,8 @@ class SelectPage(FloatLayout):
             self.config.result = run_afsa(config, custom_arr = self.config.n)
         elif self.algorithm == 'ACA':
             self.config.result = run_aca(config, custom_arr = self.config.n)
+        elif self.algorithm == 'SA_Greedy':
+            self.config.result = run_sa_greedy(config, custom_arr = self.config.n)
     
         out_put = (f"the algorithm is: {self.config.result.algorithm}\n"
                     f"the num of the solution is: {self.config.result.solution_num}\n"

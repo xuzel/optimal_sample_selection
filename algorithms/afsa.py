@@ -9,7 +9,7 @@ import typing
 
 
 class AFSA:
-    def __init__(self, func, n_dim, size_pop=100, max_iter=100,
+    def __init__(self, func, n_dim, size_pop=50, max_iter=50,
                  max_try_num=100, step=1, visual=5,
                  q=0.98, delta=0.6):
         self.func = func

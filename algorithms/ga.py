@@ -1,7 +1,7 @@
 import numpy as np
 
-from .data_structure import SatInfo, fitness_func_with_param, Result
-from .utils import TEST_SET, hash_function, replace_rows_randomly
+from data_structure import SatInfo, fitness_func_with_param, Result
+from utils import TEST_SET, hash_function, replace_rows_randomly
 
 from sko.GA import GA
 import pandas as pd
@@ -14,12 +14,12 @@ from copy import deepcopy
 
 
 def run_ga(sample_parm: typing.List[int],
-           size_pop: int = 50,
-           max_iter: int = 40,
-           prob_mut=0.01,
-           auto_parm=False,
-           greedy_init=True,
-           greedy_replace_probability=0.01,
+            size_pop: int = 40,
+            max_iter: int = 40,
+            prob_mut=0.02,
+            auto_parm=False,
+            greedy_init=True,
+            greedy_replace_probability=0.01,
            **kwargs):
     start_time = perf_counter()
     sat_info = SatInfo(*sample_parm, **kwargs)
@@ -99,7 +99,7 @@ def main():
 
 if __name__ == '__main__':
     run_ga(
-        [45, 7, 6, 5, 5],
+        [45, 8, 6, 4, 4],
         auto_parm=False,
-        max_iter=100
+        # greedy_init=False
     ).print_result(True)

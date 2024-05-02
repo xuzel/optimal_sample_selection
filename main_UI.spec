@@ -22,7 +22,10 @@ a = Analysis(
         (r'D:\文档\人工智能\example\optimal_sample_selection\static', 'static'),
         (r'D:\文档\人工智能\example\optimal_sample_selection\database.json', '.')
     ],
-    hiddenimports=[],
+    hiddenimports=[
+        'matplotlib', 'numpy', 'pandas', 'sko', 'sko.GA', 'sko.PSO', 'sko.SA',
+        'collections', 'itertools', 'os', 'sys', 'json', 'typing', 'math', 'time', 'string', 'random'
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -38,7 +41,7 @@ exe = EXE(pyz,
     a.binaries,
     a.datas,
     [],
-    name='UI',
+    name='OSS',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -52,6 +55,7 @@ exe = EXE(pyz,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon='D:\\文档\\人工智能\\example\\optimal_sample_selection\\static\\logo.ico'
 )
 
 coll = COLLECT(exe, Tree(r'D:\文档\人工智能\example\optimal_sample_selection\algorithms'),
@@ -62,4 +66,4 @@ coll = COLLECT(exe, Tree(r'D:\文档\人工智能\example\optimal_sample_selecti
                *[Tree(p) for p in (sdl2.dep_bins + glew.dep_bins)],
                strip=False,
                upx=True,
-               name='UI')
+               name='OSS')

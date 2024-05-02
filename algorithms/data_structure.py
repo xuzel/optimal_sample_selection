@@ -123,7 +123,7 @@ class Result:
                 return self
             else:
                 plt.plot(self.y_history)
-            plt.suptitle(self.title, fontsize=12, color='purple', fontweight='bold')
+            plt.suptitle(self.title, fontsize=13, color='black')
             plt.show()
         return self
 

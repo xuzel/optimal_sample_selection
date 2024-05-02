@@ -4,8 +4,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: r'static\6453.jpg_wh300.jpg'
-
+            source: r'static\art1-resized.jpg'
     BoxLayout:
         size_hint: (1,0.1)
         pos_hint: {"center_x": 0.5, "top": 1}
@@ -174,14 +173,14 @@
 #执行算法————————————————————————
         Button:
             id: excute
-            # size_hint: (0.33333, 1)
             text: "[b]Excute[/b]"
             color: 0.9, 0.9, 0.8, 1
             background_color: 0.4, 0.5, 0.6, 0.5
             markup: True
             on_press: result.text = "Please Waiting!!!"
-            on_press: input.text = root.get_input(random_n.active, input_n.active, m.text, n.text, n_content.text)
-            on_release: result.text = root.run_algorithms(m.text, n.text, k.text, j.text, s.text)
+            on_press: excute.result = root.get_input(random_n.active, input_n.active, m.text, n.text, n_content.text)
+            on_release: if excute.result is not None: result.text = root.run_algorithms(m.text, n.text, k.text, j.text, s.text)
+
         Button:
             # size_hint: (0.33333, 1)
             text: "[b]Delete[/b]"
@@ -228,7 +227,7 @@
         pos_hint:{"x": 0, 'top': 0.6}
         color: 0.9, 0.9, 0.8, 1
         background_color: 0.4, 0.5, 0.6, 0.5
-        values: ('GA','Greedy','SA','PSO','AFSA','ACA')
+        values: ('GA','Greedy','SA','SA_Greedy','PSO','AFSA','ACA')
         on_text: root.choose_algorithm(self.text)
 
     BoxLayout:

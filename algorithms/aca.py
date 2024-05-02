@@ -57,7 +57,7 @@ class ACABinary:
 
 def run_aca(sample_parm: typing.List[int],
             size_pop: int = 50,
-            max_iter: int = 200,
+            max_iter: int = 50,
             alpha: int = 1,
             beta: int = 2,
             rho: float = 0.1,

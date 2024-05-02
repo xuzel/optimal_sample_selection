@@ -11,7 +11,7 @@ import typing
 
 def run_sa(sample_parm: typing.List[int],
            random_init=False,
-           T_max=100,
+           T_max=10,
            T_min=1e-9,
            L=300,
            max_stay_counter=350,
