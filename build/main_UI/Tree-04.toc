@@ -1,7 +1,0 @@
-('D:\\miniconda\\envs\\env_1\\share\\glew\\bin',
- None,
- [],
- 'DATA',
- [('glew32.dll',
-   'D:\\miniconda\\envs\\env_1\\share\\glew\\bin\\glew32.dll',
-   'DATA')])
