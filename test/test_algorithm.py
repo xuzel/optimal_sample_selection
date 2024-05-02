@@ -2,10 +2,13 @@ import json
 import os.path
 import typing
 
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from algorithms import *
 
-
-alg = []
 test_sat = [
     {'parm': [45, 7, 6, 5, 5], 'solution': 6},
     {'parm': [45, 8, 6, 4, 4], 'solution': 8},
@@ -37,17 +40,17 @@ def test(test_set: typing.List[typing.Dict], iter_num: int, save_file_path: str)
         'aca': list(),
         'afsa': list(),
         'sa': list(),
-        'pso': list(),
-        'greedy': list()
+        'pso': list()
     }
-    # algorithm = [run_sa]
-    algorithm = [run_afsa]
+    # algorithm = [run_ga, run_aca, run_afsa, run_sa, run_pso]
+    algorithm = [run_ga]
+    # algorithm = [run_aca, run_afsa]
     for i in range(iter_num):
         for each_data in test_set:
             for each_alg in algorithm:
                 result = each_alg(each_data['parm'])
                 print(f"iter: {i}")
-                result.print_result(True)
+                result.print_result(False)
                 result.save_fit_func_pic(file_path=os.path.join(save_file_path, result.algorithm),
                                          file_name=f'iter_{i}')
                 result_dict[result.algorithm].append({
@@ -63,9 +66,9 @@ def test(test_set: typing.List[typing.Dict], iter_num: int, save_file_path: str)
 
 
 if __name__ == '__main__':
-    out_put = test(test_sat, 1, './test/result')
+    out_put = test(test_sat, 5, './test/result')
     json_output = json.dumps(out_put, indent=4)
-    with open('afsa_result.json', 'w') as file:
+    with open('result.json', 'w') as file:
         file.write(json_output)
 
 
