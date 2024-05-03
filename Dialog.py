@@ -15,27 +15,8 @@ class DownloadDialog(FloatLayout):
 
 
 class SelectDialog(FloatLayout):
-    load = ObjectProperty(None)
+    refilter = ObjectProperty(None)
     cancel = ObjectProperty(None)
-    input = ObjectProperty(None)
-    config = ObjectProperty(None)
-
-    def run_algorithms(self):
-        # try:
-        #     database = Database()
-        #     self.config.result = list(database.find_one(str(self.config.m)+"-"+str(self.config.n)+"-"+str(self.config.k)+"-"+str(self.config.j)+"-"+str(self.config.s)))[0]
-
-        # except:
-        self.ids.result_output.text = "Waiting!!!"
-        self.config.result = search(self.config.n, self.config.k, self.config.j, self.config.s)
-        return self.config.result
-
-    def import_database(self):
-        input_format = str(self.config.m) + "-" + str(self.config.n) + "-" + \
-                       str(self.config.k) + "-" + str(self.config.j) + "-" + str(self.config.s)
-        database = Database()
-        database.insert_one(input_format, self.config.result)
-        return "Upload Successfully!!!!"
 
 class DataDialog(FloatLayout):
     load = ObjectProperty(None)

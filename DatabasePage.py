@@ -37,8 +37,8 @@ class DatabasePage(FloatLayout):
         for key, value in output.items():
             print(key)
             output_str += (f"{key}\n"
-                           f"run time is: {value['time']:.4f}\n"
-                           f"the number of the solution is: {value['num_solution']}\n")
+                            f"run time is: {value['time']:.4f}\n"
+                            f"the number of the solution is: {value['num_solution']}\n")
             for solution in value['solution']:
                 output_str += f"{solution} \n"
         output_str += '\n\n'

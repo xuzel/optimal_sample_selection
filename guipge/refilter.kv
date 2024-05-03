@@ -148,8 +148,112 @@
             markup: True
             on_release: root.page_index()
 
-    ScreenManager:
-        id: screen_manager
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (0.8,0.05)
+        pos_hint: {"center_x":0.5,"top":0.8}
+        BoxLayout:
+            size_hint: (0.5,1)
+            orientation: 'horizontal'
+            Label:
+                text: "m:"
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                font_size: 40  # Larger font size
+                size_hint: (0.5,1)
+            TextInput:
+                id: m_input
+                font_size: '25sp'  # Increase font size
+                halign: 'left'  # Horizontal alignment
+                valign: 'middle'  # Vertical alignment
+                foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                background_normal: '' 
+                background_color: 1, 1, 1, 0
+        BoxLayout:
+            size_hint: (0.5,1)
+            orientation: 'horizontal'
+            Label:
+                text: "n:"
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                font_size: 40  # Larger font size
+                size_hint: (0.5,1)
+            TextInput:
+                id: n_input
+                font_size: '25sp'  # Increase font size
+                halign: 'left'  # Horizontal alignment
+                valign: 'middle'  # Vertical alignment
+                foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                background_normal: '' 
+                background_color: 1, 1, 1, 0
+        BoxLayout:
+            size_hint: (0.5,1)
+            orientation: 'horizontal'
+            Label:
+                size_hint: (0.5,1)
+                text: "k:"
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                font_size: 40  # Larger font size
+            TextInput:
+                id: k_input
+                font_size: '25sp'  # Increase font size
+                halign: 'left'  # Horizontal alignment
+                valign: 'middle'  # Vertical alignment
+                foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                background_normal: '' 
+                background_color: 1, 1, 1, 0
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (0.8,0.05)
+        pos_hint: {"center_x":0.5,"top":0.75}
+        BoxLayout:
+            size_hint: (0.5,1)
+            orientation: 'horizontal'
+            Label:
+                text: "j:"
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                font_size: 40  # Larger font size
+                size_hint: (0.5,1)
+            TextInput:
+                id: j_input
+                font_size: '25sp'  # Increase font size
+                halign: 'left'  # Horizontal alignment
+                valign: 'middle'  # Vertical alignment
+                foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                background_normal: '' 
+                background_color: 1, 1, 1, 0
+        BoxLayout:
+            size_hint: (0.5,1)
+            orientation: 'horizontal'
+            Label:
+                text: "s:"
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                font_size: 40  # Larger font size
+                size_hint: (0.5,1)
+            TextInput:
+                id: s_input
+                font_size: '25sp'  # Increase font size
+                halign: 'left'  # Horizontal alignment
+                valign: 'middle'  # Vertical alignment
+                foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                background_normal: '' 
+                background_color: 1, 1, 1, 0
+        BoxLayout:
+            size_hint: (0.5,1)
+            orientation: 'horizontal'
+            Label:
+                size_hint: (0.5,1)
+                text: "algrothim:"
+                color: 0.9, 0.9, 0.8, 1  # Black color
+                font_size: 40  # Larger font size
+            TextInput:
+                id: algrothim
+                size_hint: (0.25,1)
+                font_size: '25sp'  # Increase font size
+                halign: 'left'  # Horizontal alignment
+                valign: 'middle'  # Vertical alignment
+                foreground_color: 0.9, 0.9, 0.8, 1  # Black color
+                background_normal: '' 
+                background_color: 1, 1, 1, 0
 
 
 
@@ -157,8 +261,8 @@
         id: box1
         opacity: 0
         orientation: 'vertical'
-        size_hint: (1, 0.4)
-        pos_hint: {"center_x": 0.5, "top": 0.8}
+        size_hint: (1, 0.3)
+        pos_hint: {"center_x": 0.5, "top": 0.7}
         padding: 20
         spacing: 10
 
@@ -264,8 +368,8 @@
         id: box2
         opacity: 0
         orientation: 'vertical'
-        size_hint: (1, 0.4)
-        pos_hint: {"center_x": 0.5, "top": 0.8}
+        size_hint: (1, 0.3)
+        pos_hint: {"center_x": 0.5, "top": 0.7}
         padding: 20
         spacing: 10
 
@@ -371,8 +475,8 @@
         id: box3
         opacity: 0
         orientation: 'horizontal'
-        size_hint: (1, 0.4)
-        pos_hint: {"center_x": 0.5, "top": 0.8}
+        size_hint: (1, 0.3)
+        pos_hint: {"center_x": 0.5, "top": 0.7}
         padding: 20
         spacing: 10
         Label:

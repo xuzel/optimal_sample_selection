@@ -179,6 +179,7 @@
             markup: True
             on_press: result.text = "Please Waiting!!!"
             on_press: excute.result = root.get_input(random_n.active, input_n.active, m.text, n.text, n_content.text)
+            on_press: input.text = root.get_input(random_n.active, input_n.active, m.text, n.text, n_content.text)
             on_release: if excute.result is not None: result.text = root.run_algorithms(m.text, n.text, k.text, j.text, s.text)
 
         Button:
