@@ -1,8 +1,8 @@
 from algorithms import *
 #
-# run_ga(
-#     [45, 8, 6, 4, 4],
-# ).print_result(True)
+run_ga(
+    [45, 21, 6, 4, 4], greedy_init=True, prob_mut=0.02
+).print_result(True)
 
 
 
@@ -23,16 +23,16 @@ from algorithms import *
 # result.save_fit_func_pic('./test_result', 'test')
 
 
-result = run_aca(
-    [45, 8, 6, 4, 4], custom_arr=range(0, 8)
-).print_result(False)
-print(result.solution)
-output = f"""
-the time is {result.run_time}
-the number of the solution is {result.solution_num}
-the output is:
-"""
-for x in result.solution:
-    output += f"{x}\n"
-print(output)
+# result = run_aca(
+#     [45, 8, 6, 4, 4], custom_arr=range(0, 8)
+# ).print_result(False)
+# print(result.solution)
+# output = f"""
+# the time is {result.run_time}
+# the number of the solution is {result.solution_num}
+# the output is:
+# """
+# for x in result.solution:
+#     output += f"{x}\n"
+# print(output)
 

@@ -6,26 +6,56 @@ import itertools
 import typing
 from string import ascii_uppercase
 from collections import defaultdict
-
+from itertools import combinations
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
+import matplotlib.pyplot as plt
+from upsetplot import plot
+from upsetplot import from_contents
 
 data_order = list
 DEBUG = False
 
 
+def n_set_intersections(sets_list, n):
+    """
+    计算给定列表中任意 n 个集合的交集，并将所有这些交集的结果累加到一个新的集合中。
+
+    参数:
+    sets_list (list): 包含多个集合的列表。
+    n (int): 要求交集的集合数量。
+
+    返回:
+    set: 包含所有 n 个集合交集元素的集合。
+    """
+    # 创建一个空集合用于存储所有 n 个集合交集的元素
+    all_intersections = set()
+
+    # 遍历所有可能的 n 个集合的组合
+    for combo in combinations(sets_list, n):
+        # 计算当前组合的交集
+        if combo:
+            intersection = set.intersection(*combo)
+            # 将交集的元素添加到 all_intersections 集合中
+            all_intersections.update(intersection)
+
+    return all_intersections
+
+
 class SatInfo:
     def __init__(self, m: int, n: int, k: int, j: int, s: int, **kwargs):
         if 'custom_arr' in kwargs and kwargs['custom_arr']:
-            assert len(kwargs['custom_arr']) == n, f"the len of input arr is {len(kwargs['custom_arr'])}, but we need {n}"
+            assert len(
+                kwargs['custom_arr']) == n, f"the len of input arr is {len(kwargs['custom_arr'])}, but we need {n}"
             self.n_set = kwargs['custom_arr']
         else:
             self.n_set = data_order(ascii_uppercase[:n])
         self.all_k_set = data_order(itertools.combinations(self.n_set, k))
         self.all_j_set = data_order(itertools.combinations(self.n_set, j))
         self.all_s_set = [data_order(itertools.combinations(each_j, s)) for each_j in self.all_j_set]
-        self.graph = self.subset_cover_graph(k, j, s)
+        self.graph, self.reverse_graph = self.subset_cover_graph(k, j, s)
+        # print(len(self.graph))
 
         if DEBUG:
             print(f"all j set: \n{self.all_j_set}\n")
@@ -43,11 +73,13 @@ class SatInfo:
         j_subsets = data_order(itertools.combinations(self.n_set, j))
         k_combinations = data_order(itertools.combinations(self.n_set, k))
         cover_graph = defaultdict(list)
+        reverse_cover_graph = defaultdict(list)
         for k_comb in k_combinations:
             for j_sub in j_subsets:
                 if any(set(subset).issubset(k_comb) for subset in itertools.combinations(j_sub, s)):
                     cover_graph[tuple(k_comb)].append(tuple(j_sub))
-        return cover_graph
+                    reverse_cover_graph[tuple(j_sub)].append(tuple(k_comb))
+        return cover_graph, reverse_cover_graph
 
     def all_j_subsets_covered(self, solution):
         # solution = self.choose_list(solution)
@@ -74,7 +106,32 @@ class SatInfo:
     def encoder_greedy_solution(self):
         return self.encoder_list(self.greedy_set_cover())
 
+    def calculate_only_set(self):
+        all_set = list()
+        for value in self.reverse_graph.values():
+            this_set = set()
+            for each_sat in value:
+                this_set.add(frozenset(each_sat))
+            all_set.append(this_set)
+        # print(all_set)
+        union_set = set.union(*all_set)
+        # print(len(all_set))
+        # print(len(union_set))
+        # print(all_set)
+        # for k, v in self.reverse_graph.items():
+        #     print(k)
+        #     print(v)
+        #     print()
+        # all_intersections = n_set_intersections(all_set, 6)
+        # print(len(all_intersections))
+        # data = {}
+        # for index, x in enumerate(all_set):
+        #     data[f'set{index}'] = x
+        # upset_data = from_contents(data)
+        # plot(upset_data, show_counts=True)
+        # plt.show()
 
+        return union_set, all_set
 
 
 class Result:
@@ -181,3 +238,10 @@ def run_greedy(sample_parm: typing.List[int], **kwargs):
         y_history=[]
     )
     return result
+
+
+if __name__ == '__main__':
+    data = SatInfo(45, 8, 6, 4, 4)
+    data.calculate_only_set()
+    # for value in data.graph.values():
+    #     print(len(value))

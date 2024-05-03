@@ -14,12 +14,12 @@ from copy import deepcopy
 
 
 def run_ga(sample_parm: typing.List[int],
-           size_pop: int = 50,
-           max_iter: int = 100,
+           size_pop: int = 40,
+           max_iter: int = 40,
            prob_mut=0.01,
-           auto_parm=True,
+           auto_parm=False,
            greedy_init=True,
-           greedy_replace_probability=0.01,
+           greedy_replace_probability=0.0005,
            **kwargs):
     start_time = perf_counter()
     sat_info = SatInfo(*sample_parm, **kwargs)
