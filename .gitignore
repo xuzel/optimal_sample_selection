@@ -1,4 +1,4 @@
 __pycache__/
 test/result
-dist
-build
+dist_exe
+build_exe
